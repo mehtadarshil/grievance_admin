@@ -9,6 +9,8 @@ class CommonAppbar extends AppBar {
       {super.key,
       required String title,
       String? subTitle,
+      bool splitTitle = false,
+      List<Widget>? actions,
       VoidCallback? onLeadingTap})
       : super(
           backgroundColor: AppColors.whiteColor,
@@ -37,20 +39,35 @@ class CommonAppbar extends AppBar {
                     )
                   ],
                 )
-              : Text(
-                  title,
-                  style: TextStyle(
-                      color: AppColors.blackColor,
-                      fontFamily: FontFamily.urbanistBold,
-                      fontSize: 22),
-                ),
+              : splitTitle
+                  ? Text.rich(TextSpan(children: [
+                      TextSpan(
+                          text: "${title.split(" ").elementAt(0)} ",
+                          style: TextStyle(
+                              color: AppColors.blackColor,
+                              fontFamily: FontFamily.urbanistBold,
+                              fontSize: 22)),
+                      TextSpan(
+                          text: title.split(" ").elementAt(1),
+                          style: TextStyle(
+                              color: AppColors.blackColor,
+                              fontFamily: FontFamily.urbanistLight,
+                              fontSize: 22))
+                    ]))
+                  : Text(
+                      title,
+                      style: TextStyle(
+                          color: AppColors.blackColor,
+                          fontFamily: FontFamily.urbanistBold,
+                          fontSize: 22),
+                    ),
           actions: subTitle != null
               ? [
                   const SizedBox(
                     width: 40,
                   )
                 ]
-              : null,
+              : actions,
           leading: onLeadingTap != null
               ? GestureDetector(
                   onTap: onLeadingTap,

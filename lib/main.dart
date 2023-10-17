@@ -6,6 +6,7 @@ import 'package:grievance_admin/app/core/transalations.dart';
 import 'package:grievance_admin/app/routes/bindings/core_binding.dart';
 import 'package:grievance_admin/app/routes/route_list.dart';
 import 'package:grievance_admin/app/routes/routes.dart';
+import 'package:grievance_admin/utils/dbkeys.dart';
 import 'app/di/app_base_component.dart';
 import 'presentation/widgets/custom_progress_bar.dart';
 import 'utils/appcolors.dart';
@@ -46,7 +47,9 @@ class MyAppState extends State<MyApp> {
       fallbackLocale: const Locale("en"),
       debugShowCheckedModeBanner: false,
       getPages: Routes.getRoutes(),
-      initialRoute: RouteList.homePage,
+      initialRoute: GetStorage().read(DbKeys.userData) != null
+          ? RouteList.dashboardPage
+          : RouteList.signInPage,
       initialBinding: CoreBinding(),
       builder: (context, widget) {
         return DefaultTextStyle(

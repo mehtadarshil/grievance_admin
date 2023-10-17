@@ -1,3 +1,3 @@
 class DbKeys {
-  static String userId = "userID";
+  static String userData = "userData";
 }

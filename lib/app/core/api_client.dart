@@ -46,7 +46,8 @@ class ApiClient {
   Future<dynamic> post(
       {required String path,
       Map<String, String>? headers,
-      FormData? formData}) async {
+      FormData? formData,
+      Map<String, dynamic>? body}) async {
     AppComponentBase.instance.showProgressDialog();
     try {
       String username = 'admin';
@@ -63,7 +64,7 @@ class ApiClient {
       }
       Logger.prints("${ApiConst.baseUrl}$path");
       var response = await _dio.post("${ApiConst.baseUrl}$path",
-          data: formData, options: Options(headers: rawHeader));
+          data: body ?? formData, options: Options(headers: rawHeader));
       Logger.prints(response.data);
       if (response.statusCode == 200 || response.statusCode == 400) {
         AppComponentBase.instance.hideProgressDialog();

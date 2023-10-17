@@ -13,7 +13,8 @@ class CommonTextField extends StatelessWidget {
       this.icon,
       this.maxLines,
       this.onChange,
-      this.textInputType});
+      this.textInputType,
+      this.obscureText = false});
   final String? title;
   final String hintText;
   final TextEditingController controller;
@@ -22,6 +23,7 @@ class CommonTextField extends StatelessWidget {
   final Widget? icon;
   final int? maxLines;
   final Function(String value)? onChange;
+  final bool obscureText;
 
   @override
   Widget build(BuildContext context) {
@@ -42,8 +44,9 @@ class CommonTextField extends StatelessWidget {
           onTap: onTap,
           keyboardType: textInputType,
           onChanged: onChange,
+          obscureText: obscureText,
           readOnly: onTap != null,
-          maxLines: maxLines,
+          maxLines: obscureText ? 1 : maxLines,
           decoration: InputDecoration(
               filled: true,
               hintText: hintText,

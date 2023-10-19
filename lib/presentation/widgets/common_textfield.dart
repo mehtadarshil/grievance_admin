@@ -14,13 +14,17 @@ class CommonTextField extends StatelessWidget {
       this.maxLines,
       this.onChange,
       this.textInputType,
-      this.obscureText = false});
+      this.obscureText = false,
+      this.prefixIcon,
+      this.borderColor});
   final String? title;
   final String hintText;
   final TextEditingController controller;
   final VoidCallback? onTap;
   final TextInputType? textInputType;
   final Widget? icon;
+  final Widget? prefixIcon;
+  final Color? borderColor;
   final int? maxLines;
   final Function(String value)? onChange;
   final bool obscureText;
@@ -51,30 +55,45 @@ class CommonTextField extends StatelessWidget {
               filled: true,
               hintText: hintText,
               suffixIcon: icon,
+              prefixIcon: prefixIcon,
               contentPadding:
                   const EdgeInsets.symmetric(horizontal: 21, vertical: 20),
               hintStyle: TextStyle(
                   fontFamily: FontFamily.urbanistMedium,
                   fontSize: 16,
-                  color: AppColors.textColor),
+                  color: borderColor != null
+                      ? AppColors.textColor.withOpacity(0.5)
+                      : AppColors.textColor),
               border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
-                  borderSide: BorderSide.none),
+                  borderSide: borderColor != null
+                      ? BorderSide(color: borderColor!, width: 1)
+                      : BorderSide.none),
               errorBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
-                  borderSide: BorderSide.none),
+                  borderSide: borderColor != null
+                      ? BorderSide(color: borderColor!, width: 1)
+                      : BorderSide.none),
               enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
-                  borderSide: BorderSide.none),
+                  borderSide: borderColor != null
+                      ? BorderSide(color: borderColor!, width: 1)
+                      : BorderSide.none),
               focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
-                  borderSide: BorderSide.none),
+                  borderSide: borderColor != null
+                      ? BorderSide(color: borderColor!, width: 1)
+                      : BorderSide.none),
               disabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
-                  borderSide: BorderSide.none),
+                  borderSide: borderColor != null
+                      ? BorderSide(color: borderColor!, width: 1)
+                      : BorderSide.none),
               focusedErrorBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
-                  borderSide: BorderSide.none),
+                  borderSide: borderColor != null
+                      ? BorderSide(color: borderColor!, width: 1)
+                      : BorderSide.none),
               fillColor: AppColors.whiteColor),
         )
       ],

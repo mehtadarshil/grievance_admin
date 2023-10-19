@@ -38,6 +38,9 @@ class $AssetsImagesGen {
   AssetGenImage get documentation =>
       const AssetGenImage('assets/images/documentation.png');
 
+  /// File path: assets/images/ic_filter.svg
+  SvgGenImage get icFilter => const SvgGenImage('assets/images/ic_filter.svg');
+
   /// File path: assets/images/key.png
   AssetGenImage get key => const AssetGenImage('assets/images/key.png');
 
@@ -65,6 +68,7 @@ class $AssetsImagesGen {
         clock,
         close,
         documentation,
+        icFilter,
         key,
         login,
         onBoardingImage,

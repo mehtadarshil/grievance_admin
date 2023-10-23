@@ -23,7 +23,7 @@ class CommonTableButton extends StatelessWidget {
           style: TextStyle(
               color: AppColors.blueTextColor,
               fontFamily: FontFamily.urbanistMedium,
-              fontSize: 8),
+              fontSize: 12),
         ).paddingSymmetric(horizontal: 7, vertical: 5),
       ),
     );

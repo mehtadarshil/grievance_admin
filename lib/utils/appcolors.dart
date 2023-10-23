@@ -22,4 +22,13 @@ class AppColors {
   static Color borderColor = const Color(0xffEFEFEF);
   static Color color999999 = const Color(0xff999999);
   static Color tableButtonBg = const Color(0xffD9DFFF);
+  static Color firstActionColor = const Color(0xffE5E3FF);
+  static Color secondActionColor = const Color(0xffFFE7E3);
+  static Color thirdActionColor = const Color(0xffE3F5FF);
+  static Color fourthActionColor = const Color(0xffFFF0E3);
+  static Color fifthActionColor = const Color(0xffFAE3FF);
+  static Color sixthActionColor = const Color(0xffE3EBFF);
+  static Color seventhActionColor = const Color(0xffE8FFE3);
+  static Color eighthActionColor = const Color(0xffFFE3E3);
+  static Color redColor = const Color(0xffFF0000);
 }

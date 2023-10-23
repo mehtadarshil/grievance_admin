@@ -16,7 +16,9 @@ class CommonTextField extends StatelessWidget {
       this.textInputType,
       this.obscureText = false,
       this.prefixIcon,
-      this.borderColor});
+      this.borderColor,
+      this.focusNode,
+      this.onTapOutSide});
   final String? title;
   final String hintText;
   final TextEditingController controller;
@@ -25,6 +27,8 @@ class CommonTextField extends StatelessWidget {
   final Widget? icon;
   final Widget? prefixIcon;
   final Color? borderColor;
+  final FocusNode? focusNode;
+  final Function(PointerDownEvent)? onTapOutSide;
   final int? maxLines;
   final Function(String value)? onChange;
   final bool obscureText;
@@ -49,6 +53,8 @@ class CommonTextField extends StatelessWidget {
           keyboardType: textInputType,
           onChanged: onChange,
           obscureText: obscureText,
+          focusNode: focusNode,
+          onTapOutside: onTapOutSide,
           readOnly: onTap != null,
           maxLines: obscureText ? 1 : maxLines,
           decoration: InputDecoration(

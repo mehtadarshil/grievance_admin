@@ -16,14 +16,14 @@ class CommonRowTextField extends StatelessWidget {
             text: title,
             style: const TextStyle(
               fontFamily: FontFamily.urbanistBold,
-              fontSize: 10,
+              fontSize: 14,
             )),
         TextSpan(
             text: value,
             style: TextStyle(
               fontFamily: FontFamily.urbanistMedium,
               color: AppColors.color999999,
-              fontSize: 10,
+              fontSize: 14,
             ))
       ]),
     );

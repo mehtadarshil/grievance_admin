@@ -67,9 +67,7 @@ class CommonTextField extends StatelessWidget {
               hintStyle: TextStyle(
                   fontFamily: FontFamily.urbanistMedium,
                   fontSize: 16,
-                  color: borderColor != null
-                      ? AppColors.textColor.withOpacity(0.5)
-                      : AppColors.textColor),
+                  color: AppColors.textColor),
               border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
                   borderSide: borderColor != null

@@ -26,9 +26,10 @@ class ApiClient {
       if (headers != null) {
         rawHeader.addAll(headers);
       }
-
+      Logger.prints("${ApiConst.baseUrl}$path");
       var response = await _dio.get("${ApiConst.baseUrl}$path",
           options: Options(headers: rawHeader));
+      Logger.prints(response.data);
       if (response.statusCode == 200 || response.statusCode == 400) {
         AppComponentBase.instance.hideProgressDialog();
         return response.data;

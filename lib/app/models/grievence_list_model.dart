@@ -13,7 +13,7 @@ String temperaturesToJson(GrievenceListModel data) =>
 class GrievenceListModel {
   final int? code;
   final bool? status;
-  final List<Datum>? data;
+  final List<GDatum>? data;
   final DateTime? serverTime;
 
   GrievenceListModel({
@@ -29,7 +29,7 @@ class GrievenceListModel {
         status: json["status"],
         data: json["data"] == null
             ? []
-            : List<Datum>.from(json["data"]!.map((x) => Datum.fromJson(x))),
+            : List<GDatum>.from(json["data"]!.map((x) => GDatum.fromJson(x))),
         serverTime: json["server_time"] == null
             ? null
             : DateTime.parse(json["server_time"]),
@@ -45,7 +45,7 @@ class GrievenceListModel {
       };
 }
 
-class Datum {
+class GDatum {
   final String? idRequest;
   final String? uniqueRequestId;
   final String? departmentIds;
@@ -88,7 +88,7 @@ class Datum {
   final List<RequestStatusArray>? requestStatusArray;
   final List<RequestFileArray>? requestFileArray;
 
-  Datum({
+  GDatum({
     this.idRequest,
     this.uniqueRequestId,
     this.departmentIds,
@@ -132,7 +132,7 @@ class Datum {
     this.requestFileArray,
   });
 
-  factory Datum.fromJson(Map<String, dynamic> json) => Datum(
+  factory GDatum.fromJson(Map<String, dynamic> json) => GDatum(
         idRequest: json["id_request"],
         uniqueRequestId: json["unique_request_id"],
         departmentIds: json["department_ids"],

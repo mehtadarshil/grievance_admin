@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:grievance_admin/app/models/grievence_list_model.dart';
 import 'package:grievance_admin/app/routes/route_list.dart';
 import 'package:grievance_admin/gen/assets.gen.dart';
 import 'package:grievance_admin/gen/fonts.gen.dart';
@@ -7,10 +8,10 @@ import 'package:grievance_admin/presentation/widgets/common_button.dart';
 import 'package:grievance_admin/utils/appcolors.dart';
 
 class DialogUtil {
-  static void actionDialog({required String grievanceId}) => showDialog(
+  static void actionDialog({required GDatum grievanceModel}) => showDialog(
         context: Get.context!,
         builder: (context) => ActionDialogWidget(
-          grievanceId: grievanceId,
+          grievanceModel: grievanceModel,
         ),
       );
 
@@ -82,9 +83,9 @@ class CustomDialogWidget extends StatelessWidget {
 }
 
 class ActionDialogWidget extends StatelessWidget {
-  const ActionDialogWidget({super.key, required this.grievanceId});
+  const ActionDialogWidget({super.key, required this.grievanceModel});
 
-  final String grievanceId;
+  final GDatum grievanceModel;
 
   @override
   Widget build(BuildContext context) {
@@ -139,7 +140,7 @@ class ActionDialogWidget extends StatelessWidget {
                               text: "Respond".tr,
                               onTap: () {
                                 Get.toNamed(RouteList.sendMessage,
-                                        arguments: grievanceId)!
+                                        arguments: grievanceModel.idRequest)!
                                     .then((value) {
                                   Get.back();
                                 });
@@ -150,7 +151,7 @@ class ActionDialogWidget extends StatelessWidget {
                               text: "Email_History".tr,
                               onTap: () {
                                 Get.toNamed(RouteList.grievanceEmailHistory,
-                                        arguments: grievanceId)!
+                                        arguments: grievanceModel.idRequest)!
                                     .then((value) {
                                   Get.back();
                                 });
@@ -159,12 +160,24 @@ class ActionDialogWidget extends StatelessWidget {
                             ActionCard(
                               cardColor: AppColors.thirdActionColor,
                               text: "Transfer_Grievances".tr,
-                              onTap: () {},
+                              onTap: () {
+                                Get.toNamed(RouteList.transferGrievance,
+                                        arguments: grievanceModel)!
+                                    .then((value) {
+                                  Get.back();
+                                });
+                              },
                             ),
                             ActionCard(
                               cardColor: AppColors.fourthActionColor,
                               text: "Update_Status".tr,
-                              onTap: () {},
+                              onTap: () {
+                                Get.toNamed(RouteList.changeGrievanceStatus,
+                                        arguments: grievanceModel)!
+                                    .then((value) {
+                                  Get.back();
+                                });
+                              },
                             ),
                             ActionCard(
                               cardColor: AppColors.fifthActionColor,

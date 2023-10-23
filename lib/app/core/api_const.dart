@@ -7,6 +7,7 @@ class ApiConst {
   static const wsRespondMailToUser = "request/respondmailtouser";
   static const wsGetEmailHistoryByGrievanceId =
       "request/getemailhistorybygrievanceid";
+  static const wsGetAllStatus = "request/getallstatus";
 
   //const tags
   static const authorization = "Authorization";

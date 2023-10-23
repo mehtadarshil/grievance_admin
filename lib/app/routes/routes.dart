@@ -1,16 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:grievance_admin/app/routes/bindings/change_grievance_status_bindings.dart';
 import 'package:grievance_admin/app/routes/bindings/dashboard_binding.dart';
 import 'package:grievance_admin/app/routes/bindings/grievance_email_history_bindings.dart';
 import 'package:grievance_admin/app/routes/bindings/grievence_list_bindings.dart';
 import 'package:grievance_admin/app/routes/bindings/send_message_binding.dart';
 import 'package:grievance_admin/app/routes/bindings/sign_in_bindings.dart';
+import 'package:grievance_admin/app/routes/bindings/transfer_grievance_bindings.dart';
 import 'package:grievance_admin/app/routes/route_list.dart';
+import 'package:grievance_admin/presentation/pages/change_grievance_status/change_grievance_status_page.dart';
 import 'package:grievance_admin/presentation/pages/dashboard_page/dashboard_page.dart';
 import 'package:grievance_admin/presentation/pages/grievence_list/grievence_list_page.dart';
 import 'package:grievance_admin/presentation/pages/grivance_email_history/grievance_email_history_page.dart';
 import 'package:grievance_admin/presentation/pages/send_message/send_message_page.dart';
 import 'package:grievance_admin/presentation/pages/sign_in_page/sign_in_page.dart';
+import 'package:grievance_admin/presentation/pages/transfer_grievance/transfer_grievance_page.dart';
 
 class Routes {
   static List<GetPage<dynamic>> getRoutes() => [
@@ -33,7 +37,15 @@ class Routes {
         getPage(
             name: RouteList.grievanceEmailHistory,
             page: const GrievenceEmailHisoryPage(),
-            bindings: GrievanceEmailHistoryBindings())
+            bindings: GrievanceEmailHistoryBindings()),
+        getPage(
+            name: RouteList.transferGrievance,
+            page: const TransferGrievancePage(),
+            bindings: TransferGrievanceBindigns()),
+        getPage(
+            name: RouteList.changeGrievanceStatus,
+            page: const ChangeGrievanceStatusPage(),
+            bindings: ChangeGrievanceStatusBindings())
       ];
 }
 

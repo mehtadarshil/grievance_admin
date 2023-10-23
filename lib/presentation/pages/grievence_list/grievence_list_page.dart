@@ -544,8 +544,7 @@ class GrievenceListPage extends GetView<GrievenceListController> {
                       )),
                       DataCell(GestureDetector(
                         onTap: () {
-                          DialogUtil.actionDialog(
-                              grievanceId: detail.idRequest ?? "");
+                          DialogUtil.actionDialog(grievanceModel: detail);
                         },
                         child: Container(
                           color: Colors.transparent,

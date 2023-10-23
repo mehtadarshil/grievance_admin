@@ -60,6 +60,15 @@ class Strings {
       "From_Admin_to_You": "From Admin to You",
       "From_You_to_Admin": "From You to Admin",
       "Message_field": "Message",
+      "Transfer_Grievance": "Transfer Grievance",
+      "Current_Department": "Current Department: ",
+      "Transfer_Grievance_To": "Transfer Grievance To: ",
+      "This_action_cannot_be_undone": "This action cannot be undone.",
+      "Customer": "Customer: ",
+      "Transfer_Reason": "Transfer Reason: ",
+      "Save": "Save",
+      "Change_Grievance_Status": "Change Grievance Status",
+      "Remarks": "Remarks: "
     },
     "or": {
       "no_internet": "କ internet ଣସି ଇଣ୍ଟରନେଟ୍ ସଂଯୋଗ ନାହିଁ |",

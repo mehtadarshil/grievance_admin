@@ -31,4 +31,8 @@ class AppColors {
   static Color seventhActionColor = const Color(0xffE8FFE3);
   static Color eighthActionColor = const Color(0xffFFE3E3);
   static Color redColor = const Color(0xffFF0000);
+  static Color colorE6F3FF = const Color(0xffE6F3FF);
+  static Color colorEDA32E = const Color(0xffEDA32E);
+  static Color colorFFF9F0 = const Color(0xffFFF9F0);
+  static Color lightButtonColor = const Color(0xffE8E8E8);
 }

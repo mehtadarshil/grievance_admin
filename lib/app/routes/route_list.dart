@@ -6,4 +6,6 @@ class RouteList {
   static const grievanceEmailHistory = "/grievanceEmailHistory";
   static const transferGrievance = "/transferGrievance";
   static const changeGrievanceStatus = "/changeGrievanceStatus";
+  static const alertPageScreen = "/alertPageScreen";
+  static const grievanceFilterPage = "/grievanceFilterPage";
 }

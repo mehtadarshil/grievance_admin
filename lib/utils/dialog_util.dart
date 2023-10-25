@@ -24,6 +24,71 @@ class DialogUtil {
       ),
     );
   }
+
+  static void sortOrderDialog() => showDialog(
+        context: Get.context!,
+        builder: (context) => const SortOrderDialogWidget(),
+      );
+}
+
+class SortOrderDialogWidget extends StatelessWidget {
+  const SortOrderDialogWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisSize: MainAxisSize.max,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Container(
+          height: Get.height * 0.4,
+          padding: const EdgeInsets.all(20),
+          decoration: BoxDecoration(
+              color: AppColors.whiteColor,
+              borderRadius: BorderRadius.circular(25)),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              GestureDetector(
+                onTap: () {
+                  Get.back();
+                },
+                child: Align(
+                  alignment: Alignment.centerRight,
+                  child: Container(
+                      color: Colors.transparent,
+                      child: Assets.images.close.svg(height: 16, width: 16)),
+                ),
+              ),
+              Text(
+                "Sort_Order".tr,
+                style: const TextStyle(
+                  fontFamily: FontFamily.urbanistExtraBold,
+                  fontSize: 26,
+                ),
+              ).paddingSymmetric(horizontal: 40),
+              Divider(
+                color: AppColors.borderColor,
+              ),
+              Expanded(
+                child: ListView.builder(
+                  itemCount: 8,
+                  itemBuilder: (context, index) => const SizedBox(
+                    height: 40,
+                    child: Text(
+                      "Grievance Id Ascending",
+                      style: TextStyle(
+                          fontFamily: FontFamily.urbanistMedium, fontSize: 16),
+                    ),
+                  ).paddingSymmetric(horizontal: 38),
+                ),
+              )
+            ],
+          ),
+        ),
+      ],
+    ).paddingSymmetric(horizontal: 20);
+  }
 }
 
 class CustomDialogWidget extends StatelessWidget {

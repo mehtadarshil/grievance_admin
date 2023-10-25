@@ -10,6 +10,8 @@ import 'package:grievance_admin/utils/dbkeys.dart';
 
 class GrievenceListController extends GetxController {
   final TextEditingController searchController = TextEditingController();
+  final TextEditingController customerController = TextEditingController();
+  final TextEditingController loactionController = TextEditingController();
 
   Rxn<GrievenceListModel> grievanceDetails = Rxn<GrievenceListModel>();
   final ApiClient _apiClient = Get.find();

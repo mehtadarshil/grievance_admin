@@ -68,7 +68,16 @@ class Strings {
       "Transfer_Reason": "Transfer Reason: ",
       "Save": "Save",
       "Change_Grievance_Status": "Change Grievance Status",
-      "Remarks": "Remarks: "
+      "Remarks": "Remarks: ",
+      "Alert": "Alert",
+      "Sort_Order": "Sort Order",
+      "Filters": "Filters",
+      "Enter_here": "Enter here",
+      "Status_normal": "Status",
+      "Search_google_address": "Search google location",
+      "Location": "Location",
+      "Reset_Filters": "Reset Filters",
+      "Sort_By_Date": "Sort By Date"
     },
     "or": {
       "no_internet": "କ internet ଣସି ଇଣ୍ଟରନେଟ୍ ସଂଯୋଗ ନାହିଁ |",

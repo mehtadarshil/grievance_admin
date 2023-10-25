@@ -25,24 +25,30 @@ class GrievenceListPage extends GetView<GrievenceListController> {
         splitTitle: true,
         onLeadingTap: () {},
         actions: [
-          Stack(
-            children: [
-              const Align(
-                  alignment: Alignment.center,
-                  child: Icon(Icons.notifications_outlined)),
-              Positioned(
-                right: 3,
-                top: 18,
-                child: Container(
-                  height: 8,
-                  width: 8,
-                  decoration: BoxDecoration(
-                      border: Border.all(color: AppColors.whiteColor, width: 1),
-                      color: AppColors.primaryRedColor,
-                      shape: BoxShape.circle),
+          GestureDetector(
+            onTap: () {
+              Get.toNamed(RouteList.alertPageScreen);
+            },
+            child: Stack(
+              children: [
+                const Align(
+                    alignment: Alignment.center,
+                    child: Icon(Icons.notifications_outlined)),
+                Positioned(
+                  right: 3,
+                  top: 18,
+                  child: Container(
+                    height: 8,
+                    width: 8,
+                    decoration: BoxDecoration(
+                        border:
+                            Border.all(color: AppColors.whiteColor, width: 1),
+                        color: AppColors.primaryRedColor,
+                        shape: BoxShape.circle),
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           )
         ],
       ),
@@ -69,15 +75,20 @@ class GrievenceListPage extends GetView<GrievenceListController> {
                 const SizedBox(
                   width: 10,
                 ),
-                Container(
-                  height: 60,
-                  width: 60,
-                  padding: const EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    color: AppColors.bgColor,
-                    borderRadius: BorderRadius.circular(10),
+                GestureDetector(
+                  onTap: () {
+                    Get.toNamed(RouteList.grievanceFilterPage);
+                  },
+                  child: Container(
+                    height: 60,
+                    width: 60,
+                    padding: const EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                      color: AppColors.bgColor,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Assets.images.icFilter.svg(),
                   ),
-                  child: Assets.images.icFilter.svg(),
                 )
               ],
             ).paddingSymmetric(horizontal: 20),

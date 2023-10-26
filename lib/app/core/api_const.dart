@@ -8,6 +8,9 @@ class ApiConst {
   static const wsGetEmailHistoryByGrievanceId =
       "request/getemailhistorybygrievanceid";
   static const wsGetAllStatus = "request/getallstatus";
+  static const wsGetAdminUsersByType = "adminapi/getadminusersbytype";
+  static const wstransferGrievance = "request/transfergrievance";
+  static const wsUpdateGrievanceStatus = "request/updategrievancestatus";
 
   //const tags
   static const authorization = "Authorization";
@@ -20,4 +23,12 @@ class ApiConst {
   static const grievanceId = "grievance_id";
   static const subject = "subject";
   static const message = "message";
+  static const adminType = "admin_type";
+  static const transferredToAdminUser = "transferredto_admin_user";
+  static const transferReason = "transfer_reason";
+  static const grievancePreviousStatus = "grievance_previous_status";
+  static const grievanceStatus = "grievance_status";
+  static const requestPreviousStatus = "request_previous_status";
+  static const remarks = "remarks";
+  static const grievanceStatusImage = "grievance_status_image";
 }

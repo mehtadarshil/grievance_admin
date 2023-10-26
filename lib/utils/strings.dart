@@ -77,7 +77,8 @@ class Strings {
       "Search_google_address": "Search google location",
       "Location": "Location",
       "Reset_Filters": "Reset Filters",
-      "Sort_By_Date": "Sort By Date"
+      "Sort_By_Date": "Sort By Date",
+      "Change_Status": "Change Status: "
     },
     "or": {
       "no_internet": "କ internet ଣସି ଇଣ୍ଟରନେଟ୍ ସଂଯୋଗ ନାହିଁ |",

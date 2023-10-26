@@ -5,6 +5,7 @@ import 'package:grievance_admin/gen/fonts.gen.dart';
 import 'package:grievance_admin/presentation/pages/grievence_list/controller/grievence_list_controller.dart';
 import 'package:grievance_admin/presentation/widgets/common_appbar.dart';
 import 'package:grievance_admin/presentation/widgets/common_button.dart';
+import 'package:grievance_admin/presentation/widgets/common_dropdown_widget.dart';
 import 'package:grievance_admin/presentation/widgets/common_textfield.dart';
 import 'package:grievance_admin/utils/appcolors.dart';
 
@@ -33,28 +34,9 @@ class GrievanceFilterPage extends GetView<GrievenceListController> {
                   fontFamily: FontFamily.urbanistMedium, fontSize: 16),
             ),
           ).paddingOnly(bottom: 11),
-          Container(
-            height: 60,
-            alignment: Alignment.center,
-            width: double.infinity,
-            padding: const EdgeInsets.symmetric(horizontal: 21),
-            decoration: BoxDecoration(
-                color: AppColors.whiteColor,
-                border: Border.all(color: AppColors.borderColor, width: 1),
-                borderRadius: BorderRadius.circular(10)),
-            child: DropdownButton(
-              value: "All",
-              isExpanded: true,
-              isDense: true,
-              underline: const SizedBox.shrink(),
-              items: ["All", "Assign Grievance"]
-                  .map((e) => DropdownMenuItem(
-                        value: e,
-                        child: Text(e),
-                      ))
-                  .toList(),
-              onChanged: (value) {},
-            ),
+          const CommonDropdown(
+            data: [],
+            value: '',
           ).paddingOnly(bottom: 22),
           CommonTextField(
             controller: controller.loactionController,
@@ -77,28 +59,9 @@ class GrievanceFilterPage extends GetView<GrievenceListController> {
                   fontFamily: FontFamily.urbanistMedium, fontSize: 16),
             ),
           ).paddingOnly(bottom: 11),
-          Container(
-            height: 60,
-            alignment: Alignment.center,
-            width: double.infinity,
-            padding: const EdgeInsets.symmetric(horizontal: 21),
-            decoration: BoxDecoration(
-                color: AppColors.whiteColor,
-                border: Border.all(color: AppColors.borderColor, width: 1),
-                borderRadius: BorderRadius.circular(10)),
-            child: DropdownButton(
-              value: "All",
-              isExpanded: true,
-              isDense: true,
-              underline: const SizedBox.shrink(),
-              items: ["All", "Assign Grievance"]
-                  .map((e) => DropdownMenuItem(
-                        value: e,
-                        child: Text(e),
-                      ))
-                  .toList(),
-              onChanged: (value) {},
-            ),
+          const CommonDropdown(
+            data: [],
+            value: '',
           ).paddingOnly(bottom: 22),
         ],
       ).paddingSymmetric(horizontal: 20, vertical: 30),

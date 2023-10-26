@@ -5,6 +5,7 @@ import 'package:grievance_admin/gen/fonts.gen.dart';
 import 'package:grievance_admin/presentation/pages/change_grievance_status/controller/change_grievance_status_controller.dart';
 import 'package:grievance_admin/presentation/widgets/common_appbar.dart';
 import 'package:grievance_admin/presentation/widgets/common_button.dart';
+import 'package:grievance_admin/presentation/widgets/common_dropdown_widget.dart';
 import 'package:grievance_admin/presentation/widgets/common_textfield.dart';
 import 'package:grievance_admin/utils/appcolors.dart';
 
@@ -23,6 +24,20 @@ class ChangeGrievanceStatusPage
           children: [
             Text.rich(TextSpan(children: [
               TextSpan(
+                  text: "Status".tr,
+                  style: const TextStyle(
+                    fontFamily: FontFamily.urbanistBold,
+                    fontSize: 16,
+                  )),
+              TextSpan(
+                  text: controller.grievanceModel.status,
+                  style: TextStyle(
+                      fontFamily: FontFamily.urbanistMedium,
+                      fontSize: 16,
+                      color: AppColors.color999999))
+            ])).paddingOnly(bottom: 11),
+            Text.rich(TextSpan(children: [
+              TextSpan(
                   text: "Current_Department".tr,
                   style: const TextStyle(
                     fontFamily: FontFamily.urbanistBold,
@@ -35,6 +50,14 @@ class ChangeGrievanceStatusPage
                       fontSize: 16,
                       color: AppColors.color999999))
             ])),
+            Obx(() => CommonDropdown(
+                  data: controller.allStatus.value,
+                  value: controller.selectedStatus.value,
+                  title: "Change_Status".tr,
+                  onChange: (value) {
+                    controller.selectedStatus.value = value.toString();
+                  },
+                )).paddingOnly(top: 37, bottom: 43),
             Text.rich(TextSpan(children: [
               TextSpan(
                   text: "Customer".tr,

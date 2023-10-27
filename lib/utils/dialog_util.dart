@@ -247,12 +247,24 @@ class ActionDialogWidget extends StatelessWidget {
                             ActionCard(
                               cardColor: AppColors.fifthActionColor,
                               text: "Status_History".tr,
-                              onTap: () {},
+                              onTap: () {
+                                Get.toNamed(RouteList.statusHistoryPage,
+                                        arguments: grievanceModel)!
+                                    .then((value) {
+                                  Get.back();
+                                });
+                              },
                             ),
                             ActionCard(
                               cardColor: AppColors.sixthActionColor,
                               text: "Edit".tr,
-                              onTap: () {},
+                              onTap: () {
+                                Get.toNamed(RouteList.editGrievancePage,
+                                        arguments: grievanceModel)!
+                                    .then((value) {
+                                  Get.back();
+                                });
+                              },
                             ),
                             ActionCard(
                               cardColor: AppColors.seventhActionColor,

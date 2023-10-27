@@ -78,7 +78,18 @@ class Strings {
       "Location": "Location",
       "Reset_Filters": "Reset Filters",
       "Sort_By_Date": "Sort By Date",
-      "Change_Status": "Change Status: "
+      "Change_Status": "Change Status: ",
+      "Request_Id": "Request Id:",
+      "Customer_Name": "Customer Name:",
+      "UPDATED_BY": "UPDATED BY: ",
+      "UPDATED_ON": "UPDATED ON: ",
+      "NOTIFICATION": "NOTIFICATION: ",
+      "REMARKS": "REMARKS: ",
+      "Edit_Grievance": "Edit Grievance",
+      "Name": "Name",
+      "Resolution_Date": "Resolution Date",
+      "Resolution_Time": "Resolution Time",
+      "View_Download_Files": "View / Download Files"
     },
     "or": {
       "no_internet": "କ internet ଣସି ଇଣ୍ଟରନେଟ୍ ସଂଯୋଗ ନାହିଁ |",

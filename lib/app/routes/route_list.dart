@@ -8,4 +8,6 @@ class RouteList {
   static const changeGrievanceStatus = "/changeGrievanceStatus";
   static const alertPageScreen = "/alertPageScreen";
   static const grievanceFilterPage = "/grievanceFilterPage";
+  static const statusHistoryPage = "/statusHistoryPage";
+  static const editGrievancePage = "/editGrievancePage";
 }

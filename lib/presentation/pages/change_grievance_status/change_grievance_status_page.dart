@@ -86,20 +86,71 @@ class ChangeGrievanceStatusPage
                       fontSize: 16,
                       color: AppColors.color999999))
             ])).paddingOnly(bottom: 42),
-            Assets.images.uploadImage.image().paddingOnly(bottom: 37),
+            Obx(
+              () => controller.file.value == null
+                  ? GestureDetector(
+                      onTap: () {
+                        controller.pickUpFile();
+                      },
+                      child: Assets.images.uploadImage
+                          .image()
+                          .paddingOnly(bottom: 37))
+                  : Container(
+                      height: 60,
+                      decoration: BoxDecoration(
+                          color: AppColors.whiteColor,
+                          border: Border.all(color: AppColors.borderColor),
+                          borderRadius: BorderRadius.circular(10)),
+                      child: Row(
+                        children: [
+                          Expanded(
+                              child: Text(
+                            controller.file.value?.name ?? "",
+                            maxLines: 1,
+                          )),
+                          GestureDetector(
+                            onTap: () {
+                              controller.file.value = null;
+                            },
+                            child: Container(
+                                color: Colors.transparent,
+                                height: 15,
+                                width: 15,
+                                child: Assets.images.close.svg()),
+                          )
+                        ],
+                      ).paddingSymmetric(horizontal: 21),
+                    ).paddingOnly(bottom: 30),
+            ),
             CommonTextField(
               hintText: "Remarks".tr,
               title: "Remarks".tr,
               controller: controller.remarkController,
               borderColor: AppColors.borderColor,
               maxLines: 7,
+              onChange: (value) {
+                if (value.isNotEmpty) {
+                  controller.isValid(true);
+                } else {
+                  controller.isValid(false);
+                }
+              },
             )
           ],
         ).paddingSymmetric(horizontal: 20, vertical: 30),
       ),
-      bottomNavigationBar: CommonButton(
-        text: "Save".tr,
-        onTap: () {},
+      bottomNavigationBar: Obx(
+        () => Opacity(
+          opacity: controller.isValid.value ? 1 : 0.5,
+          child: CommonButton(
+            text: "Save".tr,
+            onTap: () {
+              if (controller.isValid.value) {
+                controller.changeGrievanceStatus();
+              }
+            },
+          ),
+        ),
       ).paddingSymmetric(horizontal: 20, vertical: 30),
     );
   }

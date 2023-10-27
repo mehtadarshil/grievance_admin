@@ -11,6 +11,12 @@ class ApiConst {
   static const wsGetAdminUsersByType = "adminapi/getadminusersbytype";
   static const wstransferGrievance = "request/transfergrievance";
   static const wsUpdateGrievanceStatus = "request/updategrievancestatus";
+  static const wsGetGrievanceStatusHistoryByGrivanceid =
+      "request/getgrievancestatushistorybygrivanceid";
+  static const wsGetGrievanceFilesByGrivanceid =
+      "request/getgrievancefilesbygrivanceid";
+  static const wsGetGrievanceNumbersForAllTabs =
+      "request/getgrievancenumbersforalltabs";
 
   //const tags
   static const authorization = "Authorization";

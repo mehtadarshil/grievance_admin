@@ -36,4 +36,5 @@ class AppColors {
   static Color colorFFF9F0 = const Color(0xffFFF9F0);
   static Color lightButtonColor = const Color(0xffE8E8E8);
   static Color colorDE3E1C = const Color(0xffDE3E1C);
+  static Color cardBgColor = const Color(0xffF8F8F8);
 }

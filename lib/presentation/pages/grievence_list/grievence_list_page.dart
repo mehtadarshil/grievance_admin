@@ -8,6 +8,7 @@ import 'package:grievance_admin/presentation/widgets/common_appbar.dart';
 import 'package:grievance_admin/presentation/widgets/common_rowtext_field.dart';
 import 'package:grievance_admin/presentation/widgets/common_table_button.dart';
 import 'package:grievance_admin/presentation/widgets/common_textfield.dart';
+import 'package:grievance_admin/presentation/widgets/filter_card_widget.dart';
 import 'package:grievance_admin/utils/appcolors.dart';
 import 'package:grievance_admin/utils/dialog_util.dart';
 import 'package:intl/intl.dart';
@@ -108,6 +109,47 @@ class GrievenceListPage extends GetView<GrievenceListController> {
             const SizedBox(
               height: 38,
             ),
+            Wrap(
+              crossAxisAlignment: WrapCrossAlignment.start,
+              spacing: 8,
+              runSpacing: 8,
+              children: controller.filterCardData
+                  .map((e) => Obx(() => GestureDetector(
+                        onTap: () {
+                          controller.selectedFilterCard.value = e.value;
+                          controller.getGrievanceList();
+                        },
+                        child: FilterCardWidget(
+                            title: e.title,
+                            count: controller.allTabCount.value == null
+                                ? 0
+                                : (e.title == "Grievance"
+                                    ? controller
+                                        .allTabCount.value!.data!.grievances!
+                                    : e.title == "Pending"
+                                        ? controller.allTabCount.value!.data!
+                                            .pendencyGrievances!
+                                        : e.title == "Transferred"
+                                            ? controller.allTabCount.value!
+                                                .data!.transferredGrievances!
+                                            : e.title == "Unassigned Grievances"
+                                                ? controller.allTabCount.value!
+                                                    .data!.unassignedGrievances!
+                                                : e.title == "Resoved/Closed"
+                                                    ? controller
+                                                        .allTabCount
+                                                        .value!
+                                                        .data!
+                                                        .closedResolvedGrievances!
+                                                    : 0),
+                            selected:
+                                controller.selectedFilterCard.value == e.value),
+                      )))
+                  .toList(),
+            ),
+            const SizedBox(
+              height: 38,
+            ),
             Obx(
               () {
                 if (controller.grievanceDetails.value != null) {
@@ -191,7 +233,10 @@ class GrievenceListPage extends GetView<GrievenceListController> {
                                   children: [
                                     CommonTableButton(
                                       text: "View_Grievances_Updates".tr,
-                                      onTap: () {},
+                                      onTap: () {
+                                        Get.toNamed(RouteList.statusHistoryPage,
+                                            arguments: detail);
+                                      },
                                     ).paddingOnly(bottom: 10, top: 10),
                                     for (var i = 0;
                                         i < detail.requestStatusArray!.length;
@@ -555,7 +600,9 @@ class GrievenceListPage extends GetView<GrievenceListController> {
                       )),
                       DataCell(GestureDetector(
                         onTap: () {
-                          DialogUtil.actionDialog(grievanceModel: detail);
+                          DialogUtil.actionDialog(
+                              grievanceModel: detail,
+                              permissions: controller.permissions);
                         },
                         child: Container(
                           color: Colors.transparent,

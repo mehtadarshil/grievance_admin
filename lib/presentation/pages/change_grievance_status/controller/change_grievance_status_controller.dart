@@ -45,7 +45,8 @@ class ChangeGrievanceStatusController extends GetxController {
             .map((e) => DropDownDataModel(
                 text: e.status ?? "", value: e.idStatus ?? ""))
             .toList();
-        selectedStatus.value = allStatus.first.value;
+        selectedStatus.value =
+            grievanceModel.requestStatus ?? allStatus.first.value;
       }
     }
   }

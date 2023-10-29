@@ -17,6 +17,8 @@ class ApiConst {
       "request/getgrievancefilesbygrivanceid";
   static const wsGetGrievanceNumbersForAllTabs =
       "request/getgrievancenumbersforalltabs";
+  static const wsDeleteGrievanceById = "request/deletegrievancebyid";
+  static const wsGetUserPermissionsByRole = "adminapi/getuserpermissionsbyrole";
 
   //const tags
   static const authorization = "Authorization";
@@ -37,4 +39,9 @@ class ApiConst {
   static const requestPreviousStatus = "request_previous_status";
   static const remarks = "remarks";
   static const grievanceStatusImage = "grievance_status_image";
+  static const filterType = "filter_type";
+  static const grievanceStatusId = "grievance_status_id";
+  static const customerName = "customer_name";
+  static const address = "address";
+  static const roleIds = "role_ids";
 }

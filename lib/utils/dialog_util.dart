@@ -1,17 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:grievance_admin/app/core/api_client.dart';
+import 'package:grievance_admin/app/core/api_const.dart';
+import 'package:grievance_admin/app/models/delete_grievance_model.dart';
 import 'package:grievance_admin/app/models/grievence_list_model.dart';
 import 'package:grievance_admin/app/routes/route_list.dart';
 import 'package:grievance_admin/gen/assets.gen.dart';
 import 'package:grievance_admin/gen/fonts.gen.dart';
+import 'package:grievance_admin/presentation/pages/grievence_list/controller/grievence_list_controller.dart';
 import 'package:grievance_admin/presentation/widgets/common_button.dart';
 import 'package:grievance_admin/utils/appcolors.dart';
 
 class DialogUtil {
-  static void actionDialog({required GDatum grievanceModel}) => showDialog(
+  static void actionDialog(
+          {required GDatum grievanceModel,
+          required List<String> permissions}) =>
+      showDialog(
         context: Get.context!,
         builder: (context) => ActionDialogWidget(
           grievanceModel: grievanceModel,
+          permissions: permissions,
         ),
       );
 
@@ -28,6 +36,41 @@ class DialogUtil {
   static void sortOrderDialog() => showDialog(
         context: Get.context!,
         builder: (context) => const SortOrderDialogWidget(),
+      );
+
+  static void confirmationAlert(
+          {String? title, required VoidCallback onConfirm}) =>
+      showDialog(
+        context: Get.context!,
+        builder: (context) => AlertDialog(
+          title: Text(
+            title ?? "delete_title".tr,
+            style: const TextStyle(
+                fontFamily: FontFamily.urbanistMedium, fontSize: 14),
+          ),
+          actions: [
+            TextButton(
+                onPressed: () {
+                  Get.back();
+                },
+                child: Text(
+                  "cancel".tr,
+                  style: TextStyle(
+                      fontFamily: FontFamily.urbanistSemiBold,
+                      fontSize: 12,
+                      color: AppColors.primaryBlueColor),
+                )),
+            TextButton(
+                onPressed: onConfirm,
+                child: Text(
+                  "confirm".tr,
+                  style: TextStyle(
+                      fontFamily: FontFamily.urbanistSemiBold,
+                      fontSize: 12,
+                      color: AppColors.primaryRedColor),
+                ))
+          ],
+        ),
       );
 }
 
@@ -148,12 +191,15 @@ class CustomDialogWidget extends StatelessWidget {
 }
 
 class ActionDialogWidget extends StatelessWidget {
-  const ActionDialogWidget({super.key, required this.grievanceModel});
+  const ActionDialogWidget(
+      {super.key, required this.grievanceModel, required this.permissions});
 
   final GDatum grievanceModel;
+  final List<String> permissions;
 
   @override
   Widget build(BuildContext context) {
+    GrievenceListController grievenceListController = Get.find();
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -211,71 +257,109 @@ class ActionDialogWidget extends StatelessWidget {
                                 });
                               },
                             ),
-                            ActionCard(
-                              cardColor: AppColors.secondActionColor,
-                              text: "Email_History".tr,
-                              onTap: () {
-                                Get.toNamed(RouteList.grievanceEmailHistory,
-                                        arguments: grievanceModel.idRequest)!
-                                    .then((value) {
-                                  Get.back();
-                                });
-                              },
-                            ),
-                            ActionCard(
-                              cardColor: AppColors.thirdActionColor,
-                              text: "Transfer_Grievances".tr,
-                              onTap: () {
-                                Get.toNamed(RouteList.transferGrievance,
-                                        arguments: grievanceModel)!
-                                    .then((value) {
-                                  Get.back();
-                                });
-                              },
-                            ),
-                            ActionCard(
-                              cardColor: AppColors.fourthActionColor,
-                              text: "Update_Status".tr,
-                              onTap: () {
-                                Get.toNamed(RouteList.changeGrievanceStatus,
-                                        arguments: grievanceModel)!
-                                    .then((value) {
-                                  Get.back();
-                                });
-                              },
-                            ),
-                            ActionCard(
-                              cardColor: AppColors.fifthActionColor,
-                              text: "Status_History".tr,
-                              onTap: () {
-                                Get.toNamed(RouteList.statusHistoryPage,
-                                        arguments: grievanceModel)!
-                                    .then((value) {
-                                  Get.back();
-                                });
-                              },
-                            ),
-                            ActionCard(
-                              cardColor: AppColors.sixthActionColor,
-                              text: "Edit".tr,
-                              onTap: () {
-                                Get.toNamed(RouteList.editGrievancePage,
-                                        arguments: grievanceModel)!
-                                    .then((value) {
-                                  Get.back();
-                                });
-                              },
-                            ),
-                            ActionCard(
-                              cardColor: AppColors.seventhActionColor,
-                              text: "View".tr,
-                              onTap: () {},
-                            ),
-                            ActionCard(
-                              cardColor: AppColors.eighthActionColor,
-                              text: "Delete".tr,
-                              onTap: () {},
-                            ),
+                            if (permissions.contains("ViewEmailHistory"))
+                              ActionCard(
+                                cardColor: AppColors.secondActionColor,
+                                text: "Email_History".tr,
+                                onTap: () {
+                                  Get.toNamed(RouteList.grievanceEmailHistory,
+                                          arguments: grievanceModel.idRequest)!
+                                      .then((value) {
+                                    Get.back();
+                                  });
+                                },
+                              ),
+                            if (permissions.contains("Transfer"))
+                              ActionCard(
+                                cardColor: AppColors.thirdActionColor,
+                                text: "Transfer_Grievances".tr,
+                                onTap: () {
+                                  Get.toNamed(RouteList.transferGrievance,
+                                          arguments: grievanceModel)!
+                                      .then((value) {
+                                    Get.back();
+                                  });
+                                },
+                              ),
+                            if (permissions.contains("UpdateStatus"))
+                              ActionCard(
+                                cardColor: AppColors.fourthActionColor,
+                                text: "Update_Status".tr,
+                                onTap: () {
+                                  Get.toNamed(RouteList.changeGrievanceStatus,
+                                          arguments: grievanceModel)!
+                                      .then((value) {
+                                    Get.back();
+                                  });
+                                },
+                              ),
+                            if (permissions.contains("ViewStatusHistory"))
+                              ActionCard(
+                                cardColor: AppColors.fifthActionColor,
+                                text: "Status_History".tr,
+                                onTap: () {
+                                  Get.toNamed(RouteList.statusHistoryPage,
+                                          arguments: grievanceModel)!
+                                      .then((value) {
+                                    Get.back();
+                                  });
+                                },
+                              ),
+                            if (permissions.contains("Edit"))
+                              ActionCard(
+                                cardColor: AppColors.sixthActionColor,
+                                text: "Edit".tr,
+                                onTap: () {
+                                  Get.toNamed(RouteList.editGrievancePage,
+                                          arguments: grievanceModel)!
+                                      .then((value) {
+                                    Get.back();
+                                  });
+                                },
+                              ),
+                            if (permissions.contains("view"))
+                              ActionCard(
+                                cardColor: AppColors.seventhActionColor,
+                                text: "View".tr,
+                                onTap: () {},
+                              ),
+                            if (permissions.contains("Delete"))
+                              ActionCard(
+                                cardColor: AppColors.eighthActionColor,
+                                text: "Delete".tr,
+                                onTap: () {
+                                  DialogUtil.confirmationAlert(
+                                    onConfirm: () async {
+                                      Get.back();
+                                      ApiClient apiClient = ApiClient();
+                                      var deleteJson = await apiClient.post(
+                                          path: ApiConst.wsDeleteGrievanceById,
+                                          body: {
+                                            ApiConst.grievanceId:
+                                                grievanceModel.idRequest
+                                          });
+                                      if (deleteJson != null) {
+                                        DeleteGrievanceModel
+                                            deleteGrievanceModel =
+                                            DeleteGrievanceModel.fromJson(
+                                                deleteJson);
+                                        if (deleteGrievanceModel.status ??
+                                            false) {
+                                          DialogUtil.customDialog(
+                                              title: deleteGrievanceModel
+                                                      .data!.message ??
+                                                  "");
+                                          grievenceListController
+                                              .getGrievanceList();
+                                        } else {
+                                          DialogUtil.customDialog(
+                                              title: "Failed".tr, error: true);
+                                        }
+                                      }
+                                    },
+                                  );
+                                },
+                              ),
                           ],
                         ),
                       ),

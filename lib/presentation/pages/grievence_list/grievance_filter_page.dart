@@ -34,10 +34,15 @@ class GrievanceFilterPage extends GetView<GrievenceListController> {
                   fontFamily: FontFamily.urbanistMedium, fontSize: 16),
             ),
           ).paddingOnly(bottom: 11),
-          const CommonDropdown(
-            data: [],
-            value: '',
-          ).paddingOnly(bottom: 22),
+          Obx(
+            () => CommonDropdown(
+              data: controller.allStatus.value,
+              value: controller.selectedStatus.value,
+              onChange: (value) {
+                controller.selectedStatus.value = value.toString();
+              },
+            ).paddingOnly(bottom: 22),
+          ),
           CommonTextField(
             controller: controller.loactionController,
             hintText: 'Search_google_address'.tr,
@@ -72,7 +77,11 @@ class GrievanceFilterPage extends GetView<GrievenceListController> {
               text: "Reset_Filters".tr,
               color: AppColors.lightButtonColor,
               textColor: AppColors.textColor,
-              onTap: () {},
+              onTap: () {
+                controller.customerController.clear();
+                controller.loactionController.clear();
+                controller.selectedStatus.value = "";
+              },
             ),
           ),
           const SizedBox(
@@ -81,7 +90,10 @@ class GrievanceFilterPage extends GetView<GrievenceListController> {
           Expanded(
             child: CommonButton(
               text: "Search".tr,
-              onTap: () {},
+              onTap: () {
+                Get.back();
+                controller.getGrievanceList();
+              },
             ),
           ),
         ],

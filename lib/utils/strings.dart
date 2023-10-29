@@ -89,7 +89,10 @@ class Strings {
       "Name": "Name",
       "Resolution_Date": "Resolution Date",
       "Resolution_Time": "Resolution Time",
-      "View_Download_Files": "View / Download Files"
+      "View_Download_Files": "View / Download Files",
+      "delete_title": "Are you sure you want to delete ?",
+      "cancel": "cancel",
+      "confirm": "confirm"
     },
     "or": {
       "no_internet": "କ internet ଣସି ଇଣ୍ଟରନେଟ୍ ସଂଯୋଗ ନାହିଁ |",

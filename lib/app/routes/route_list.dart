@@ -10,4 +10,5 @@ class RouteList {
   static const grievanceFilterPage = "/grievanceFilterPage";
   static const statusHistoryPage = "/statusHistoryPage";
   static const editGrievancePage = "/editGrievancePage";
+  static const wsDeleteGrievanceById = "request/deletegrievancebyid";
 }

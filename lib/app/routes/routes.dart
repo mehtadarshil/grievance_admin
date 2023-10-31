@@ -6,6 +6,7 @@ import 'package:grievance_admin/app/routes/bindings/dashboard_binding.dart';
 import 'package:grievance_admin/app/routes/bindings/edit_grievance_bindings.dart';
 import 'package:grievance_admin/app/routes/bindings/grievance_email_history_bindings.dart';
 import 'package:grievance_admin/app/routes/bindings/grievence_list_bindings.dart';
+import 'package:grievance_admin/app/routes/bindings/report_bindings.dart';
 import 'package:grievance_admin/app/routes/bindings/send_message_binding.dart';
 import 'package:grievance_admin/app/routes/bindings/sign_in_bindings.dart';
 import 'package:grievance_admin/app/routes/bindings/status_history_binding.dart';
@@ -18,6 +19,7 @@ import 'package:grievance_admin/presentation/pages/dashboard_page/dashboard_page
 import 'package:grievance_admin/presentation/pages/grievence_list/grievance_filter_page.dart';
 import 'package:grievance_admin/presentation/pages/grievence_list/grievence_list_page.dart';
 import 'package:grievance_admin/presentation/pages/grivance_email_history/grievance_email_history_page.dart';
+import 'package:grievance_admin/presentation/pages/report_page/report_page.dart';
 import 'package:grievance_admin/presentation/pages/send_message/send_message_page.dart';
 import 'package:grievance_admin/presentation/pages/sign_in_page/sign_in_page.dart';
 import 'package:grievance_admin/presentation/pages/status_history_page/status_history_page.dart';
@@ -68,7 +70,11 @@ class Routes {
         getPage(
             name: RouteList.editGrievancePage,
             page: const EditGrievancePage(),
-            bindings: EditGrievanceBindings())
+            bindings: EditGrievanceBindings()),
+        getPage(
+            name: RouteList.reportPage,
+            page: const ReportPage(),
+            bindings: ReportBindings())
       ];
 }
 

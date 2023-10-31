@@ -23,15 +23,33 @@ class DialogUtil {
         ),
       );
 
-  static void customDialog({required String title, bool? error}) {
+  static void customDialog(
+      {required String title, bool? error, VoidCallback? onTap}) {
     showDialog(
       context: Get.context!,
       builder: (context) => CustomDialogWidget(
         title: title,
+        onTap: onTap,
         error: error ?? false,
       ),
     );
   }
+
+  static Future<DateTime?> showDatePickerDialog() => showDatePicker(
+      context: Get.context!,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(DateTime.now().year - 100),
+      builder: (context, child) {
+        return Theme(
+            data: ThemeData.light().copyWith(
+                primaryColor: AppColors.primaryBlueColor,
+                buttonTheme:
+                    ButtonThemeData(buttonColor: AppColors.primaryBlueColor),
+                colorScheme: const ColorScheme.light()
+                    .copyWith(primary: AppColors.primaryBlueColor)),
+            child: child!);
+      },
+      lastDate: DateTime.now());
 
   static void sortOrderDialog() => showDialog(
         context: Get.context!,
@@ -136,10 +154,11 @@ class SortOrderDialogWidget extends StatelessWidget {
 
 class CustomDialogWidget extends StatelessWidget {
   const CustomDialogWidget(
-      {super.key, required this.title, this.error = false});
+      {super.key, required this.title, this.error = false, this.onTap});
 
   final String title;
   final bool error;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -178,9 +197,10 @@ class CustomDialogWidget extends StatelessWidget {
               ).paddingOnly(bottom: 60),
               CommonButton(
                 text: "Close".tr,
-                onTap: () {
-                  Get.back();
-                },
+                onTap: onTap ??
+                    () {
+                      Get.back();
+                    },
               )
             ],
           ),

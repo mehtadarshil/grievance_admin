@@ -24,8 +24,13 @@ class GrievenceListPage extends GetView<GrievenceListController> {
       appBar: CommonAppbar(
         title: "grievence_list".tr,
         splitTitle: true,
-        onLeadingTap: () {},
         actions: [
+          GestureDetector(
+                  onTap: () {
+                    Get.toNamed(RouteList.reportPage);
+                  },
+                  child: const Icon(Icons.text_snippet_outlined))
+              .paddingOnly(right: 5),
           GestureDetector(
             onTap: () {
               Get.toNamed(RouteList.alertPageScreen);
@@ -50,7 +55,7 @@ class GrievenceListPage extends GetView<GrievenceListController> {
                 ),
               ],
             ),
-          )
+          ).paddingOnly(right: 5)
         ],
       ),
       body: SingleChildScrollView(
@@ -93,19 +98,19 @@ class GrievenceListPage extends GetView<GrievenceListController> {
                 )
               ],
             ).paddingSymmetric(horizontal: 20),
-            const SizedBox(
-              height: 9,
-            ),
-            Align(
-              alignment: Alignment.centerRight,
-              child: Text(
-                "Add_New_Grievances".tr,
-                style: TextStyle(
-                    color: AppColors.blueTextColor,
-                    fontSize: 12,
-                    fontFamily: FontFamily.urbanistMedium),
-              ),
-            ).paddingSymmetric(horizontal: 20),
+            // const SizedBox(
+            //   height: 9,
+            // ),
+            // Align(
+            //   alignment: Alignment.centerRight,
+            //   child: Text(
+            //     "Add_New_Grievances".tr,
+            //     style: TextStyle(
+            //         color: AppColors.blueTextColor,
+            //         fontSize: 12,
+            //         fontFamily: FontFamily.urbanistMedium),
+            //   ),
+            // ).paddingSymmetric(horizontal: 20),
             const SizedBox(
               height: 38,
             ),

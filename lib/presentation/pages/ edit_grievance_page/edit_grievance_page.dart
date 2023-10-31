@@ -7,6 +7,7 @@ import 'package:grievance_admin/presentation/widgets/common_appbar.dart';
 import 'package:grievance_admin/presentation/widgets/common_button.dart';
 import 'package:grievance_admin/presentation/widgets/common_textfield.dart';
 import 'package:grievance_admin/utils/appcolors.dart';
+import 'package:grievance_admin/utils/dialog_util.dart';
 
 class EditGrievancePage extends GetView<EditGrievanceController> {
   const EditGrievancePage({super.key});
@@ -133,7 +134,11 @@ class EditGrievancePage extends GetView<EditGrievanceController> {
                 const SizedBox(
                   height: 20,
                 ),
-                Assets.images.uploadImage.image(),
+                GestureDetector(
+                    onTap: () {
+                      controller.pickFiles();
+                    },
+                    child: Assets.images.uploadImage.image()),
                 const SizedBox(
                   height: 57,
                 ),
@@ -142,6 +147,48 @@ class EditGrievancePage extends GetView<EditGrievanceController> {
                   style: const TextStyle(
                       fontFamily: FontFamily.urbanistMedium, fontSize: 16),
                 ),
+                Obx(() => controller.pickedFiles.isEmpty
+                    ? const SizedBox.shrink()
+                    : ListView.separated(
+                        physics: const NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemBuilder: (context, index) {
+                          var data = controller.pickedFiles[index];
+                          return Row(
+                            children: [
+                              Expanded(
+                                child: Text(
+                                  data.name,
+                                  style: TextStyle(
+                                      color: AppColors.primaryBlueColor),
+                                ),
+                              ),
+                              const SizedBox(
+                                width: 5,
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  controller.pickedFiles.removeWhere(
+                                      (element) => element.name == data.name);
+                                },
+                                child: Container(
+                                  color: AppColors.eighthActionColor,
+                                  child: Text(
+                                    "Delete".tr,
+                                    style: const TextStyle(
+                                        fontFamily: FontFamily.urbanistMedium,
+                                        fontSize: 12),
+                                  ).paddingSymmetric(
+                                      vertical: 8, horizontal: 11),
+                                ),
+                              )
+                            ],
+                          ).paddingSymmetric(vertical: 25);
+                        },
+                        separatorBuilder: (context, index) => Divider(
+                              color: AppColors.borderColor,
+                            ),
+                        itemCount: controller.pickedFiles.length)),
                 Obx(() => controller.grievanceFiles.value == null
                     ? const SizedBox.shrink()
                     : ListView.separated(
@@ -162,14 +209,27 @@ class EditGrievancePage extends GetView<EditGrievanceController> {
                               const SizedBox(
                                 width: 5,
                               ),
-                              Container(
-                                color: AppColors.eighthActionColor,
-                                child: Text(
-                                  "Delete".tr,
-                                  style: const TextStyle(
-                                      fontFamily: FontFamily.urbanistMedium,
-                                      fontSize: 12),
-                                ).paddingSymmetric(vertical: 8, horizontal: 11),
+                              GestureDetector(
+                                onTap: () {
+                                  DialogUtil.confirmationAlert(
+                                    onConfirm: () {
+                                      Get.back();
+                                      controller.deleteImage(
+                                          imageID: data.requestImageId!,
+                                          imageName: data.requestImageName!);
+                                    },
+                                  );
+                                },
+                                child: Container(
+                                  color: AppColors.eighthActionColor,
+                                  child: Text(
+                                    "Delete".tr,
+                                    style: const TextStyle(
+                                        fontFamily: FontFamily.urbanistMedium,
+                                        fontSize: 12),
+                                  ).paddingSymmetric(
+                                      vertical: 8, horizontal: 11),
+                                ),
                               )
                             ],
                           ).paddingSymmetric(vertical: 25);
@@ -189,7 +249,9 @@ class EditGrievancePage extends GetView<EditGrievanceController> {
       ),
       bottomNavigationBar: CommonButton(
         text: "Save".tr,
-        onTap: () {},
+        onTap: () {
+          controller.updateGrievance();
+        },
       ).paddingSymmetric(horizontal: 20, vertical: 25),
     );
   }

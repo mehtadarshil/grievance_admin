@@ -9,7 +9,9 @@ import 'package:grievance_admin/app/models/dropdown_data_model.dart';
 import 'package:grievance_admin/app/models/get_all_status_model.dart';
 import 'package:grievance_admin/app/models/grievence_list_model.dart';
 import 'package:grievance_admin/app/models/sign_in_model.dart';
+import 'package:grievance_admin/app/models/transfer_grievance_model.dart';
 import 'package:grievance_admin/utils/dbkeys.dart';
+import 'package:grievance_admin/utils/dialog_util.dart';
 import 'package:grievance_admin/utils/logger.dart';
 
 class ChangeGrievanceStatusController extends GetxController {
@@ -69,6 +71,15 @@ class ChangeGrievanceStatusController extends GetxController {
 
     var changeGrievanceStatusJson = await _apiClient.post(
         path: ApiConst.wsUpdateGrievanceStatus, formData: formData);
-    if (changeGrievanceStatusJson != null) {}
+    if (changeGrievanceStatusJson != null) {
+      TransferGrievanceModel changeGrievanceModel =
+          TransferGrievanceModel.fromJson(changeGrievanceStatusJson);
+      if (changeGrievanceModel.status ?? false) {
+        DialogUtil.customDialog(
+            title: changeGrievanceModel.data?.message ?? "");
+      } else {
+        DialogUtil.customDialog(title: "Failed".tr, error: false);
+      }
+    }
   }
 }

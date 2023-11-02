@@ -24,6 +24,8 @@ class ApiConst {
       "reports/getgrievancereportnumbersfortabs";
   static const wsUpdateGrievance = "request/updategrievance";
   static const wsDeleteGrievanceImage = "request/deletegrievanceimage";
+  static const wsGetUnreadStatusAndEmailUpdates =
+      "request/getunreadstatusandemailupdates";
 
   //const tags
   static const authorization = "Authorization";

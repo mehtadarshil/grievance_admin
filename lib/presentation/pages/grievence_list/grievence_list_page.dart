@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:grievance_admin/app/routes/route_list.dart';
 import 'package:grievance_admin/gen/assets.gen.dart';
 import 'package:grievance_admin/gen/fonts.gen.dart';
@@ -10,6 +11,7 @@ import 'package:grievance_admin/presentation/widgets/common_table_button.dart';
 import 'package:grievance_admin/presentation/widgets/common_textfield.dart';
 import 'package:grievance_admin/presentation/widgets/filter_card_widget.dart';
 import 'package:grievance_admin/utils/appcolors.dart';
+import 'package:grievance_admin/utils/dbkeys.dart';
 import 'package:grievance_admin/utils/dialog_util.dart';
 import 'package:intl/intl.dart';
 import 'package:simple_html_css/simple_html_css.dart';
@@ -35,27 +37,42 @@ class GrievenceListPage extends GetView<GrievenceListController> {
             onTap: () {
               Get.toNamed(RouteList.alertPageScreen);
             },
-            child: Stack(
-              children: [
-                const Align(
-                    alignment: Alignment.center,
-                    child: Icon(Icons.notifications_outlined)),
-                Positioned(
-                  right: 3,
-                  top: 18,
-                  child: Container(
-                    height: 8,
-                    width: 8,
-                    decoration: BoxDecoration(
-                        border:
-                            Border.all(color: AppColors.whiteColor, width: 1),
-                        color: AppColors.primaryRedColor,
-                        shape: BoxShape.circle),
+            child: Container(
+              color: Colors.transparent,
+              child: Stack(
+                children: [
+                  const Align(
+                      alignment: Alignment.center,
+                      child: Icon(Icons.notifications_outlined)),
+                  Positioned(
+                    right: 3,
+                    top: 18,
+                    child: Container(
+                      height: 8,
+                      width: 8,
+                      decoration: BoxDecoration(
+                          border:
+                              Border.all(color: AppColors.whiteColor, width: 1),
+                          color: AppColors.primaryRedColor,
+                          shape: BoxShape.circle),
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ).paddingOnly(right: 5)
+          ).paddingOnly(right: 5),
+          GestureDetector(
+                  onTap: () {
+                    DialogUtil.confirmationAlert(
+                      title: "log_out_title".tr,
+                      onConfirm: () async {
+                        await GetStorage().write(DbKeys.userData, null);
+                        Get.offAllNamed(RouteList.signInPage);
+                      },
+                    );
+                  },
+                  child: const Icon(Icons.logout_rounded))
+              .paddingOnly(right: 5),
         ],
       ),
       body: SingleChildScrollView(
@@ -611,6 +628,7 @@ class GrievenceListPage extends GetView<GrievenceListController> {
                         },
                         child: Container(
                           color: Colors.transparent,
+                          margin: const EdgeInsets.all(10),
                           width: 18,
                           height: 18,
                           child: Assets.images.actionIcon.svg(),

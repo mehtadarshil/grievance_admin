@@ -64,7 +64,7 @@ class DialogUtil {
           title: Text(
             title ?? "delete_title".tr,
             style: const TextStyle(
-                fontFamily: FontFamily.urbanistMedium, fontSize: 14),
+                fontFamily: FontFamily.urbanistMedium, fontSize: 16),
           ),
           actions: [
             TextButton(
@@ -75,7 +75,7 @@ class DialogUtil {
                   "cancel".tr,
                   style: TextStyle(
                       fontFamily: FontFamily.urbanistSemiBold,
-                      fontSize: 12,
+                      fontSize: 16,
                       color: AppColors.primaryBlueColor),
                 )),
             TextButton(
@@ -84,7 +84,7 @@ class DialogUtil {
                   "confirm".tr,
                   style: TextStyle(
                       fontFamily: FontFamily.urbanistSemiBold,
-                      fontSize: 12,
+                      fontSize: 16,
                       color: AppColors.primaryRedColor),
                 ))
           ],

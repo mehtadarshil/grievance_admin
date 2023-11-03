@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:grievance_admin/gen/fonts.gen.dart';
 import 'package:grievance_admin/presentation/pages/status_history_page/controller/status_history_controller.dart';
 import 'package:grievance_admin/presentation/widgets/common_appbar.dart';
-import 'package:grievance_admin/presentation/widgets/common_button.dart';
 import 'package:grievance_admin/utils/appcolors.dart';
 import 'package:intl/intl.dart';
 
@@ -255,10 +254,6 @@ class StatusHistoryPage extends GetView<StatusHistoryController> {
           ],
         ),
       ),
-      bottomNavigationBar: CommonButton(
-        text: "Save".tr,
-        onTap: () {},
-      ).paddingSymmetric(vertical: 28, horizontal: 20),
     );
   }
 }

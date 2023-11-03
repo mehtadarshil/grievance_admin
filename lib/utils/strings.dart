@@ -91,6 +91,7 @@ class Strings {
       "Resolution_Time": "Resolution Time",
       "View_Download_Files": "View / Download Files",
       "delete_title": "Are you sure you want to delete ?",
+      "log_out_title": "Are you sure you want to log out ?",
       "cancel": "cancel",
       "confirm": "confirm",
       "Reports": "Reports",

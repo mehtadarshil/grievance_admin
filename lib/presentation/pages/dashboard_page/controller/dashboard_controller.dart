@@ -43,11 +43,11 @@ class DashboardController extends GetxController
   }
 
   void isValidCheck2() {
-    if (selectedDateTypeStatus.value == "custom" &&
-        (fromDateStatus.text.isEmpty || toDateStatus.text.isEmpty)) {
-      isValidStatus(false);
+    if (selectedDateTypeDepartment.value == "custom" &&
+        (fromDateDepartment.text.isEmpty || toDateDepartment.text.isEmpty)) {
+      isValidDepartment(false);
     } else {
-      isValidStatus(true);
+      isValidDepartment(true);
     }
   }
 

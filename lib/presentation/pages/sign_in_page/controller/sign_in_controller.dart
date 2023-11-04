@@ -23,7 +23,7 @@ class SignInController extends GetxController {
       SigninModel signinModel = SigninModel.fromJson(signInJson);
       if (signinModel.status!) {
         GetStorage().write(DbKeys.userData, signinModel.data!.first.toJson());
-        Get.toNamed(RouteList.grievenceList);
+        Get.offAllNamed(RouteList.grievenceList);
       } else {}
     }
   }

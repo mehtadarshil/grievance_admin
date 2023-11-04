@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:grievance_admin/gen/assets.gen.dart';
 import 'package:grievance_admin/gen/fonts.gen.dart';
-import 'package:grievance_admin/presentation/pages/%20edit_grievance_page/controller/edit_grievance_controller.dart';
+import 'package:grievance_admin/presentation/pages/edit_grievance_page/controller/edit_grievance_controller.dart';
 import 'package:grievance_admin/presentation/widgets/common_appbar.dart';
 import 'package:grievance_admin/presentation/widgets/common_button.dart';
 import 'package:grievance_admin/presentation/widgets/common_textfield.dart';

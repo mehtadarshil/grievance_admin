@@ -273,113 +273,143 @@ class ActionDialogWidget extends StatelessWidget {
                                 Get.toNamed(RouteList.sendMessage,
                                         arguments: grievanceModel.idRequest)!
                                     .then((value) {
+                                  grievenceListController.pageNo = 0;
+                                  grievenceListController.grievanceDetails
+                                      .clear();
+                                  grievenceListController.loadCount();
+                                  grievenceListController.getGrievanceList();
+
                                   Get.back();
                                 });
                               },
                             ),
-                            if (permissions.contains("ViewEmailHistory"))
-                              ActionCard(
-                                cardColor: AppColors.secondActionColor,
-                                text: "Email_History".tr,
-                                onTap: () {
-                                  Get.toNamed(RouteList.grievanceEmailHistory,
-                                          arguments: grievanceModel.idRequest)!
-                                      .then((value) {
+                            // if (permissions.contains("ViewEmailHistory"))
+                            ActionCard(
+                              cardColor: AppColors.secondActionColor,
+                              text: "Email_History".tr,
+                              onTap: () {
+                                Get.toNamed(RouteList.grievanceEmailHistory,
+                                        arguments: grievanceModel.idRequest)!
+                                    .then((value) {
+                                  Get.back();
+                                });
+                              },
+                            ),
+                            // if (permissions.contains("Transfer"))
+                            ActionCard(
+                              cardColor: AppColors.thirdActionColor,
+                              text: "Transfer_Grievances".tr,
+                              onTap: () {
+                                Get.toNamed(RouteList.transferGrievance,
+                                        arguments: grievanceModel)!
+                                    .then((value) {
+                                  grievenceListController.pageNo = 0;
+                                  grievenceListController.grievanceDetails
+                                      .clear();
+                                  grievenceListController.loadCount();
+                                  grievenceListController.getGrievanceList();
+
+                                  Get.back();
+                                });
+                              },
+                            ),
+                            // if (permissions.contains("UpdateStatus"))
+                            ActionCard(
+                              cardColor: AppColors.fourthActionColor,
+                              text: "Update_Status".tr,
+                              onTap: () {
+                                Get.toNamed(RouteList.changeGrievanceStatus,
+                                        arguments: grievanceModel)!
+                                    .then((value) {
+                                  Get.back();
+                                  grievenceListController.pageNo = 0;
+                                  grievenceListController.grievanceDetails
+                                      .clear();
+                                  grievenceListController.loadCount();
+                                  grievenceListController.getGrievanceList();
+                                });
+                              },
+                            ),
+                            // if (permissions.contains("ViewStatusHistory"))
+                            ActionCard(
+                              cardColor: AppColors.fifthActionColor,
+                              text: "Status_History".tr,
+                              onTap: () {
+                                Get.toNamed(RouteList.statusHistoryPage,
+                                        arguments: grievanceModel)!
+                                    .then((value) {
+                                  Get.back();
+                                });
+                              },
+                            ),
+                            // if (permissions.contains("Edit"))
+                            ActionCard(
+                              cardColor: AppColors.sixthActionColor,
+                              text: "Edit".tr,
+                              onTap: () {
+                                Get.toNamed(RouteList.editGrievancePage,
+                                        arguments: grievanceModel)!
+                                    .then((value) {
+                                  grievenceListController.pageNo = 0;
+                                  grievenceListController.grievanceDetails
+                                      .clear();
+                                  grievenceListController.loadCount();
+                                  grievenceListController.getGrievanceList();
+
+                                  Get.back();
+                                });
+                              },
+                            ),
+                            // if (permissions.contains("view"))
+                            ActionCard(
+                              cardColor: AppColors.seventhActionColor,
+                              text: "View".tr,
+                              onTap: () {
+                                Get.toNamed(RouteList.grievanceDetails,
+                                    arguments: grievanceModel);
+                              },
+                            ),
+                            // if (permissions.contains("Delete"))
+                            ActionCard(
+                              cardColor: AppColors.eighthActionColor,
+                              text: "Delete".tr,
+                              onTap: () {
+                                DialogUtil.confirmationAlert(
+                                  onConfirm: () async {
                                     Get.back();
-                                  });
-                                },
-                              ),
-                            if (permissions.contains("Transfer"))
-                              ActionCard(
-                                cardColor: AppColors.thirdActionColor,
-                                text: "Transfer_Grievances".tr,
-                                onTap: () {
-                                  Get.toNamed(RouteList.transferGrievance,
-                                          arguments: grievanceModel)!
-                                      .then((value) {
-                                    Get.back();
-                                  });
-                                },
-                              ),
-                            if (permissions.contains("UpdateStatus"))
-                              ActionCard(
-                                cardColor: AppColors.fourthActionColor,
-                                text: "Update_Status".tr,
-                                onTap: () {
-                                  Get.toNamed(RouteList.changeGrievanceStatus,
-                                          arguments: grievanceModel)!
-                                      .then((value) {
-                                    Get.back();
-                                  });
-                                },
-                              ),
-                            if (permissions.contains("ViewStatusHistory"))
-                              ActionCard(
-                                cardColor: AppColors.fifthActionColor,
-                                text: "Status_History".tr,
-                                onTap: () {
-                                  Get.toNamed(RouteList.statusHistoryPage,
-                                          arguments: grievanceModel)!
-                                      .then((value) {
-                                    Get.back();
-                                  });
-                                },
-                              ),
-                            if (permissions.contains("Edit"))
-                              ActionCard(
-                                cardColor: AppColors.sixthActionColor,
-                                text: "Edit".tr,
-                                onTap: () {
-                                  Get.toNamed(RouteList.editGrievancePage,
-                                          arguments: grievanceModel)!
-                                      .then((value) {
-                                    Get.back();
-                                  });
-                                },
-                              ),
-                            if (permissions.contains("view"))
-                              ActionCard(
-                                cardColor: AppColors.seventhActionColor,
-                                text: "View".tr,
-                                onTap: () {},
-                              ),
-                            if (permissions.contains("Delete"))
-                              ActionCard(
-                                cardColor: AppColors.eighthActionColor,
-                                text: "Delete".tr,
-                                onTap: () {
-                                  DialogUtil.confirmationAlert(
-                                    onConfirm: () async {
-                                      Get.back();
-                                      ApiClient apiClient = ApiClient();
-                                      var deleteJson = await apiClient.post(
-                                          path: ApiConst.wsDeleteGrievanceById,
-                                          body: {
-                                            ApiConst.grievanceId:
-                                                grievanceModel.idRequest
-                                          });
-                                      if (deleteJson != null) {
-                                        DeleteGrievanceModel
-                                            deleteGrievanceModel =
-                                            DeleteGrievanceModel.fromJson(
-                                                deleteJson);
-                                        if (deleteGrievanceModel.status ??
-                                            false) {
-                                          DialogUtil.customDialog(
-                                              title: deleteGrievanceModel
-                                                      .data!.message ??
-                                                  "");
-                                          grievenceListController
-                                              .getGrievanceList();
-                                        } else {
-                                          DialogUtil.customDialog(
-                                              title: "Failed".tr, error: true);
-                                        }
+                                    ApiClient apiClient = ApiClient();
+                                    var deleteJson = await apiClient.post(
+                                        path: ApiConst.wsDeleteGrievanceById,
+                                        body: {
+                                          ApiConst.grievanceId:
+                                              grievanceModel.idRequest
+                                        });
+                                    if (deleteJson != null) {
+                                      DeleteGrievanceModel
+                                          deleteGrievanceModel =
+                                          DeleteGrievanceModel.fromJson(
+                                              deleteJson);
+                                      if (deleteGrievanceModel.status ??
+                                          false) {
+                                        DialogUtil.customDialog(
+                                            title: deleteGrievanceModel
+                                                    .data!.message ??
+                                                "");
+                                        grievenceListController.pageNo = 0;
+                                        grievenceListController.grievanceDetails
+                                            .clear();
+                                        grievenceListController.loadCount();
+                                        grievenceListController
+                                            .getGrievanceList();
+                                      } else {
+                                        DialogUtil.customDialog(
+                                            title: "Failed".tr, error: true);
                                       }
-                                    },
-                                  );
-                                },
-                              ),
+                                    }
+                                  },
+                                );
+                              },
+                            ),
                           ],
                         ),
                       ),

@@ -11,4 +11,5 @@ class RouteList {
   static const statusHistoryPage = "/statusHistoryPage";
   static const editGrievancePage = "/editGrievancePage";
   static const reportPage = "/reportPage";
+  static const grievanceDetails = "/grievanceDetails";
 }

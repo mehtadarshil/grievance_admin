@@ -48,7 +48,7 @@ class MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       getPages: Routes.getRoutes(),
       initialRoute: GetStorage().read(DbKeys.userData) != null
-          ? RouteList.grievenceList
+          ? RouteList.dashboardPage
           : RouteList.signInPage,
       initialBinding: CoreBinding(),
       builder: (context, widget) {

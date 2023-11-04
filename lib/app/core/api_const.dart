@@ -26,6 +26,11 @@ class ApiConst {
   static const wsDeleteGrievanceImage = "request/deletegrievanceimage";
   static const wsGetUnreadStatusAndEmailUpdates =
       "request/getunreadstatusandemailupdates";
+  static const wsGetAllDepartments = "request/getalldepartments";
+  static const wsGetGrievanceStatusWiseGraph =
+      "reports/getgrievancestatuswisegraph";
+  static const wsGetGrievanceDepartmentWiseGraph =
+      "reports/getgrievancedepartmentwisegraph";
 
   //const tags
   static const authorization = "Authorization";
@@ -60,4 +65,6 @@ class ApiConst {
   static const grievanceImage = "grievance_image";
   static const imageId = "image_id";
   static const imageName = "image_name";
+  static const noOfRequestsPerPage = "no_of_requests_per_page";
+  static const pageNo = "page_no";
 }

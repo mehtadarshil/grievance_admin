@@ -16,7 +16,7 @@ class Strings {
       "Search": "Search",
       "Add_New_Grievances": "+ Add New Grievances",
       "Si": "Si",
-      "Grievance_Details": "Grievance  Details",
+      "Grievance_Details": "Grievance Details",
       "Description": "Description",
       "Status_Updates": "Status Updates",
       "Message_Updates": "Message Updates",

@@ -5,6 +5,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:grievance_admin/app/core/api_client.dart';
 import 'package:grievance_admin/app/core/api_const.dart';
 import 'package:grievance_admin/app/models/all_grievance_tab_count_model.dart';
+import 'package:grievance_admin/app/models/department_model.dart';
 import 'package:grievance_admin/app/models/dropdown_data_model.dart';
 import 'package:grievance_admin/app/models/filter_card_model.dart';
 import 'package:grievance_admin/app/models/get_all_status_model.dart';
@@ -12,19 +13,53 @@ import 'package:grievance_admin/app/models/grievence_list_model.dart';
 import 'package:grievance_admin/app/models/sign_in_model.dart';
 import 'package:grievance_admin/app/models/user_permission_by_role_model.dart';
 import 'package:grievance_admin/utils/dbkeys.dart';
+import 'package:grievance_admin/utils/logger.dart';
 
 class GrievenceListController extends GetxController {
   final TextEditingController searchController = TextEditingController();
   final TextEditingController customerController = TextEditingController();
   final TextEditingController loactionController = TextEditingController();
+  final TextEditingController departmentController = TextEditingController();
 
-  Rxn<GrievenceListModel> grievanceDetails = Rxn<GrievenceListModel>();
+  RxList<GDatum> grievanceDetails = <GDatum>[].obs;
   final ApiClient _apiClient = Get.find();
   RxString selectedFilterCard = "throughput".obs;
+  RxString selectedDateType = "".obs;
   RxList<DropDownDataModel> allStatus = <DropDownDataModel>[].obs;
   RxString selectedStatus = "".obs;
   List<String> permissions = [];
   Rxn<AllGrievanceTabCountModel> allTabCount = Rxn<AllGrievanceTabCountModel>();
+  Rxn<DepartmentModel> departmentModel = Rxn<DepartmentModel>();
+  RxString selectedDepartmentId = ''.obs;
+  String tempDepartmentName = '';
+  String tempDepartmentId = '';
+  int pageNo = 1;
+
+  RxBool isValid = true.obs;
+
+  final TextEditingController fromDate = TextEditingController();
+  final TextEditingController toDate = TextEditingController();
+
+  List<DropDownDataModel> dropdownData = [
+    DropDownDataModel(text: "--- All ---", value: ""),
+    DropDownDataModel(text: "Today", value: "today"),
+    DropDownDataModel(text: "Last Week", value: "lw"),
+    DropDownDataModel(text: "Current Month", value: "cm"),
+    DropDownDataModel(text: "Last Month", value: "lm"),
+    DropDownDataModel(text: "Last 3 Month", value: "l3m"),
+    DropDownDataModel(text: "Last 6 Month", value: "l6m"),
+    DropDownDataModel(text: "Last 9 Month", value: "l9m"),
+    DropDownDataModel(text: "Date Range", value: "custom"),
+  ];
+
+  void isValidCheck() {
+    if (selectedDateType.value == "custom" &&
+        (fromDate.text.isEmpty || toDate.text.isEmpty)) {
+      isValid(false);
+    } else {
+      isValid(true);
+    }
+  }
 
   List<FilterCardModel> filterCardData = [
     FilterCardModel(title: "Grievance", value: "throughput"),
@@ -41,11 +76,37 @@ class GrievenceListController extends GetxController {
       await loadCount();
       await getAllStatus();
       await loadPermissions();
+      await getDepartments();
     });
     super.onReady();
   }
 
+  Future<void> getDepartments() async {
+    var departJson = await _apiClient.get(path: ApiConst.wsGetAllDepartments);
+    if (departJson != null) {
+      departmentModel.value = DepartmentModel.fromJson(departJson);
+      selectedDepartmentId.value =
+          departmentModel.value!.data!.first.idDepartment!;
+      tempDepartmentId = departmentModel.value!.data!.first.idDepartment!;
+      tempDepartmentName = departmentModel.value!.data!.first.departmentName!;
+    }
+  }
+
   Future<void> getGrievanceList() async {
+    Logger.prints({
+      ApiConst.adminId:
+          UserData.fromJson(GetStorage().read(DbKeys.userData)).idAdmin,
+      ApiConst.filterType: selectedFilterCard.value,
+      ApiConst.grievanceStatusId: selectedStatus.value,
+      ApiConst.customerName: customerController.text,
+      ApiConst.address: loactionController.text,
+      ApiConst.adminDepartment: tempDepartmentId,
+      ApiConst.dateType: selectedDateType.value,
+      ApiConst.dateFrom: fromDate.text,
+      ApiConst.dateTo: toDate.text,
+      ApiConst.noOfRequestsPerPage: "20",
+      ApiConst.pageNo: "$pageNo"
+    });
     var grievanceList = await _apiClient.post(
         path: ApiConst.wsGetGrievanceList,
         formData: FormData.fromMap({
@@ -54,21 +115,40 @@ class GrievenceListController extends GetxController {
           ApiConst.filterType: selectedFilterCard.value,
           ApiConst.grievanceStatusId: selectedStatus.value,
           ApiConst.customerName: customerController.text,
-          ApiConst.address: loactionController.text
+          ApiConst.address: loactionController.text,
+          ApiConst.adminDepartment: tempDepartmentId,
+          ApiConst.dateType: selectedDateType.value,
+          ApiConst.dateFrom: fromDate.text,
+          ApiConst.dateTo: toDate.text,
+          ApiConst.noOfRequestsPerPage: "20",
+          ApiConst.pageNo: "$pageNo"
         }));
 
     if (grievanceList != null) {
       GrievenceListModel grievenceListModel =
           GrievenceListModel.fromJson(grievanceList);
-      grievanceDetails.value = grievenceListModel;
+      grievanceDetails.addAll(grievenceListModel.data!);
+    } else {
+      grievanceDetails.clear();
     }
   }
 
   Future<void> loadCount() async {
     UserData userData = UserData.fromJson(GetStorage().read(DbKeys.userData));
-    var countJson = await _apiClient.post(
-        path: ApiConst.wsGetGrievanceNumbersForAllTabs,
-        body: {ApiConst.adminId: userData.idAdmin ?? ""});
+    var countJson = await _apiClient
+        .post(path: ApiConst.wsGetGrievanceNumbersForAllTabs, body: {
+      ApiConst.adminId: userData.idAdmin,
+      ApiConst.filterType: selectedFilterCard.value,
+      ApiConst.grievanceStatusId: selectedStatus.value,
+      ApiConst.customerName: customerController.text,
+      ApiConst.address: loactionController.text,
+      ApiConst.adminDepartment: tempDepartmentId,
+      ApiConst.dateType: selectedDateType.value,
+      ApiConst.dateFrom: fromDate.text,
+      ApiConst.dateTo: toDate.text,
+      ApiConst.noOfRequestsPerPage: "20",
+      ApiConst.pageNo: "$pageNo"
+    });
     if (countJson != null) {
       AllGrievanceTabCountModel allGrievanceTabCountModel =
           AllGrievanceTabCountModel.fromJson(countJson);

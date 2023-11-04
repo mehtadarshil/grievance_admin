@@ -3,12 +3,15 @@ import 'package:get/get.dart';
 import 'package:google_places_autocomplete_flutter/google_places_autocomplete_flutter.dart';
 import 'package:grievance_admin/gen/assets.gen.dart';
 import 'package:grievance_admin/gen/fonts.gen.dart';
+import 'package:grievance_admin/presentation/pages/department_page/department_page.dart';
 import 'package:grievance_admin/presentation/pages/grievence_list/controller/grievence_list_controller.dart';
 import 'package:grievance_admin/presentation/widgets/common_appbar.dart';
 import 'package:grievance_admin/presentation/widgets/common_button.dart';
 import 'package:grievance_admin/presentation/widgets/common_dropdown_widget.dart';
 import 'package:grievance_admin/presentation/widgets/common_textfield.dart';
 import 'package:grievance_admin/utils/appcolors.dart';
+import 'package:grievance_admin/utils/dialog_util.dart';
+import 'package:intl/intl.dart';
 
 class GrievanceFilterPage extends GetView<GrievenceListController> {
   const GrievanceFilterPage({super.key});
@@ -27,6 +30,19 @@ class GrievanceFilterPage extends GetView<GrievenceListController> {
                     hintText: "Enter_here".tr,
                     title: "Customer".tr,
                     controller: controller.customerController)
+                .paddingOnly(bottom: 22),
+            CommonTextField(
+                    borderColor: AppColors.borderColor,
+                    hintText: "Enter_here".tr,
+                    title: "Department".tr,
+                    onTap: () {
+                      if (controller.tempDepartmentId.isNotEmpty) {
+                        controller.selectedDepartmentId.value =
+                            controller.tempDepartmentId;
+                      }
+                      Get.to(() => const DepartmentPage());
+                    },
+                    controller: controller.departmentController)
                 .paddingOnly(bottom: 22),
             Opacity(
               opacity: 0.6,
@@ -103,6 +119,53 @@ class GrievanceFilterPage extends GetView<GrievenceListController> {
                     postalCodeResponse.description ?? "";
               },
             ).paddingOnly(bottom: 22),
+            Obx(() => CommonDropdown(
+                  data: controller.dropdownData,
+                  title: "Sort_By_Date".tr,
+                  value: controller.selectedDateType.value,
+                  onChange: (value) {
+                    controller.selectedDateType.value = value.toString();
+                    controller.isValidCheck();
+                  },
+                )).paddingOnly(bottom: 11),
+            Obx(
+              () => Visibility(
+                visible: controller.selectedDateType.value == "custom",
+                child: CommonTextField(
+                  hintText: "From".tr,
+                  borderColor: AppColors.borderColor,
+                  controller: controller.fromDate,
+                  title: "From".tr,
+                  onTap: () async {
+                    var fromDate = await DialogUtil.showDatePickerDialog();
+                    if (fromDate != null) {
+                      controller.fromDate.text =
+                          DateFormat("MM/dd/yyyy").format(fromDate);
+                      controller.isValidCheck();
+                    }
+                  },
+                ).paddingOnly(bottom: 11),
+              ),
+            ),
+            Obx(
+              () => Visibility(
+                visible: controller.selectedDateType.value == "custom",
+                child: CommonTextField(
+                  hintText: "To".tr,
+                  borderColor: AppColors.borderColor,
+                  controller: controller.toDate,
+                  title: "To".tr,
+                  onTap: () async {
+                    var toDate = await DialogUtil.showDatePickerDialog();
+                    if (toDate != null) {
+                      controller.toDate.text =
+                          DateFormat("MM/dd/yyyy").format(toDate);
+                      controller.isValidCheck();
+                    }
+                  },
+                ),
+              ),
+            )
             // Opacity(
             //   opacity: 0.6,
             //   child: Text(
@@ -129,6 +192,10 @@ class GrievanceFilterPage extends GetView<GrievenceListController> {
                 controller.customerController.clear();
                 controller.loactionController.clear();
                 controller.selectedStatus.value = "";
+                controller.departmentController.clear();
+                controller.tempDepartmentId = "";
+                controller.selectedDateType.value = "";
+                controller.isValidCheck();
               },
             ),
           ),
@@ -136,12 +203,23 @@ class GrievanceFilterPage extends GetView<GrievenceListController> {
             width: 16,
           ),
           Expanded(
-            child: CommonButton(
-              text: "Search".tr,
-              onTap: () {
-                Get.back();
-                controller.getGrievanceList();
-              },
+            child: Obx(
+              () => Opacity(
+                opacity: controller.isValid.value ? 1 : 0.5,
+                child: CommonButton(
+                  text: "Search".tr,
+                  onTap: controller.isValid.value
+                      ? () {
+                          controller.grievanceDetails.clear();
+                          controller.pageNo = 1;
+                          Get.back();
+                          controller.getGrievanceList().then((value) {
+                            controller.loadCount();
+                          });
+                        }
+                      : () {},
+                ),
+              ),
             ),
           ),
         ],

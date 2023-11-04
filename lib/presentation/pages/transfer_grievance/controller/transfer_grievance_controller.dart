@@ -72,7 +72,11 @@ class TransferGrievanceController extends GetxController {
           TransferGrievanceModel.fromJson(transferGrievance);
       if (transferGrievanceModel.status!) {
         DialogUtil.customDialog(
-            title: transferGrievanceModel.data?.message ?? "");
+          title: transferGrievanceModel.data?.message ?? "",
+          onTap: () {
+            Get.close(2);
+          },
+        );
       } else {
         DialogUtil.customDialog(
             title: transferGrievanceModel.message ?? "", error: true);

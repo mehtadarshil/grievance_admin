@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:grievance_admin/app/routes/route_list.dart';
 import 'package:grievance_admin/gen/assets.gen.dart';
 import 'package:grievance_admin/gen/fonts.gen.dart';
 import 'package:grievance_admin/presentation/pages/report_page/controller/report_controller.dart';
@@ -17,6 +18,15 @@ class ReportPage extends GetView<ReportController> {
       appBar: CommonAppbar(
         title: "Reports".tr,
         actions: [
+          GestureDetector(
+            onTap: () {
+              Get.toNamed(RouteList.dashboardPage);
+            },
+            child: Container(
+                color: Colors.transparent,
+                child: const Icon(Icons.pie_chart_outline_rounded)
+                    .paddingOnly(right: 12)),
+          ),
           GestureDetector(
             onTap: () {
               Get.to(() => const ReportFilterPage());

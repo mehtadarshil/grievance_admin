@@ -24,7 +24,6 @@ class DashboardPage extends GetView<DashboardController> {
     return Scaffold(
       appBar: CommonAppbar(
         title: "Dashboard".tr,
-        onLeadingTap: () {},
       ),
       body: Column(
         children: [

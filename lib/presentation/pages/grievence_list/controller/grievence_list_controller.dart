@@ -68,20 +68,20 @@ class GrievenceListController extends GetxController {
     FilterCardModel(title: "Pending", value: "pendency"),
     FilterCardModel(title: "Transferred", value: "transferred"),
     FilterCardModel(
-        title: "Unassigned Grievances", value: "unassignedgrievance"),
-    FilterCardModel(title: "Resoved/Closed", value: "closedresolved")
+        title: "Unassigned_Grievances", value: "unassignedgrievance"),
+    FilterCardModel(title: "Resolved/Closed", value: "closedresolved")
   ];
 
   @override
   void onInit() {
-    scrollController.addListener(() {
+    scrollController.addListener(() async {
       if (scrollController.position.atEdge) {
         if (scrollController.position.pixels == 0) {
         } else {
           if (!AppComponentBase.instance.loading) {
             pageNo = (pageNo + 1);
-            getGrievanceList();
-            loadCount();
+            await getGrievanceList();
+            await loadCount();
           }
         }
       }

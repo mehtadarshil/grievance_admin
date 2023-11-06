@@ -78,6 +78,9 @@ class GrievenceListPage extends GetView<GrievenceListController> {
       ),
       body: RefreshIndicator(
         onRefresh: () async {
+          controller.pageNo = 0;
+          controller.grievanceDetails.clear();
+          await controller.loadCount();
           return controller.getGrievanceList();
         },
         child: SingleChildScrollView(
@@ -150,7 +153,7 @@ class GrievenceListPage extends GetView<GrievenceListController> {
                             controller.getGrievanceList();
                           },
                           child: FilterCardWidget(
-                              title: e.title,
+                              title: (e.title.tr).replaceAll(":", ""),
                               count: controller.allTabCount.value == null
                                   ? 0
                                   : (e.title == "Grievance"
@@ -758,9 +761,9 @@ class GrievenceListPage extends GetView<GrievenceListController> {
                       ),
                     );
                   } else {
-                    return const Text(
-                      "No Data Found",
-                      style: TextStyle(
+                    return Text(
+                      "No Data Found".tr,
+                      style: const TextStyle(
                           fontFamily: FontFamily.urbanistSemiBold,
                           fontSize: 18),
                     ).paddingOnly(top: 150);

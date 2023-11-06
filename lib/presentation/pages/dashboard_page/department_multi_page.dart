@@ -13,8 +13,8 @@ class DepartmentMultiPage extends GetView<DashboardController> {
     return Scaffold(
       appBar: CommonAppbar(title: ("Department".tr).replaceAll(":", "")),
       body: Obx(() => controller.departmentModel.value == null
-          ? const Center(
-              child: Text("No Data Found"),
+          ? Center(
+              child: Text("No Data Found".tr),
             )
           : SingleChildScrollView(
               child: Column(

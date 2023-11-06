@@ -39,12 +39,12 @@ class AlertPageScreen extends GetView<AlertPageController> {
         children: [
           TabBar(
             labelColor: AppColors.blueTextColor,
-            tabs: const [
+            tabs: [
               Tab(
-                text: "Status",
+                text: "Status".tr,
               ),
               Tab(
-                text: "Email",
+                text: "Email".tr,
               )
             ],
             controller: controller.tabController,

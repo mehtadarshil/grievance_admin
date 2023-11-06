@@ -61,7 +61,7 @@ class ReportPage extends GetView<ReportController> {
                         controller.selectedFilterCard.value = e.value;
                       },
                       child: FilterCardWidget(
-                          title: e.title,
+                          title: (e.title.tr).replaceAll(":", ""),
                           count: controller.reportCount.value == null
                               ? 0
                               : (e.title == "Grievance"
@@ -232,83 +232,83 @@ class ReportPage extends GetView<ReportController> {
                           columnSpacing: 20,
                           headingRowColor:
                               MaterialStatePropertyAll(AppColors.headerColor),
-                          columns: const [
+                          columns: [
                             DataColumn(
                                 label: Text(
-                              "Si",
-                              style: TextStyle(
+                              "Si".tr,
+                              style: const TextStyle(
                                 fontFamily: FontFamily.urbanistMedium,
                                 fontSize: 14,
                               ),
                             )),
                             DataColumn(
                                 label: Text(
-                              "Department",
-                              style: TextStyle(
+                              "Department".tr,
+                              style: const TextStyle(
                                 fontFamily: FontFamily.urbanistMedium,
                                 fontSize: 14,
                               ),
                             )),
                             DataColumn(
                                 label: Text(
-                              "Total Grievance",
-                              style: TextStyle(
+                              "Total_Grievance".tr,
+                              style: const TextStyle(
                                 fontFamily: FontFamily.urbanistMedium,
                                 fontSize: 14,
                               ),
                             )),
                             DataColumn(
                                 label: Text(
-                              "Resolved",
-                              style: TextStyle(
+                              "Resolved".tr,
+                              style: const TextStyle(
                                 fontFamily: FontFamily.urbanistMedium,
                                 fontSize: 14,
                               ),
                             )),
                             DataColumn(
                                 label: Text(
-                              "Pending",
-                              style: TextStyle(
+                              "Pending".tr,
+                              style: const TextStyle(
                                 fontFamily: FontFamily.urbanistMedium,
                                 fontSize: 14,
                               ),
                             )),
                             DataColumn(
                                 label: Text(
-                              "Immediate Action",
-                              style: TextStyle(
+                              "Immediate_Action".tr,
+                              style: const TextStyle(
                                 fontFamily: FontFamily.urbanistMedium,
                                 fontSize: 14,
                               ),
                             )),
                             DataColumn(
                                 label: Text(
-                              "Medium Term",
-                              style: TextStyle(
+                              "Medium_Term".tr,
+                              style: const TextStyle(
                                 fontFamily: FontFamily.urbanistMedium,
                                 fontSize: 14,
                               ),
                             )),
                             DataColumn(
                                 label: Text(
-                              "Long Term",
-                              style: TextStyle(
+                              "Long_Term".tr,
+                              style: const TextStyle(
                                 fontFamily: FontFamily.urbanistMedium,
                                 fontSize: 14,
                               ),
                             )),
                             DataColumn(
                                 label: Text(
-                              "Transferred",
-                              style: TextStyle(
+                              "Transferred".tr,
+                              style: const TextStyle(
                                 fontFamily: FontFamily.urbanistMedium,
                                 fontSize: 14,
                               ),
                             )),
                             DataColumn(
                                 label: Text(
-                              "Not Responded",
-                              style: TextStyle(
+                              "Not_Responded".tr,
+                              style: const TextStyle(
                                 fontFamily: FontFamily.urbanistMedium,
                                 fontSize: 14,
                               ),

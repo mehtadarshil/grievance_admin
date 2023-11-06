@@ -30,12 +30,12 @@ class DashboardPage extends GetView<DashboardController> {
           TabBar(
               labelColor: AppColors.blueTextColor,
               controller: controller.tabController,
-              tabs: const [
+              tabs: [
                 Tab(
-                  text: "Status",
+                  text: "Status".tr,
                 ),
                 Tab(
-                  text: "Department",
+                  text: "Department".tr,
                 )
               ]),
           Expanded(
@@ -149,7 +149,7 @@ class DashboardPage extends GetView<DashboardController> {
                     ),
                     Obx(
                       () => controller.statusGraphDataModel.value == null
-                          ? const Text("No Data Found").paddingOnly(top: 150)
+                          ? Text("No Data Found".tr).paddingOnly(top: 150)
                           : Container(
                               decoration: BoxDecoration(
                                   border: Border.all(
@@ -346,7 +346,7 @@ class DashboardPage extends GetView<DashboardController> {
                     ),
                     Obx(
                       () => controller.departmentGraphDataModel.value == null
-                          ? const Text("No Data Found").paddingOnly(top: 150)
+                          ? Text("No Data Found".tr).paddingOnly(top: 150)
                           : Container(
                               padding: const EdgeInsets.only(top: 10),
                               decoration: BoxDecoration(

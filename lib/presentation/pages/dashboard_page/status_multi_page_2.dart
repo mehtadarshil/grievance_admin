@@ -13,8 +13,8 @@ class StatusMultiPage2 extends GetView<DashboardController> {
     return Scaffold(
       appBar: CommonAppbar(title: ("Status".tr).replaceAll(":", "")),
       body: Obx(() => controller.allStatusModel.value == null
-          ? const Center(
-              child: Text("No Data Found"),
+          ? Center(
+              child: Text("No Data Found".tr),
             )
           : SingleChildScrollView(
               child: Column(

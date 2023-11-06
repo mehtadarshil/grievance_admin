@@ -29,10 +29,10 @@ class ReportController extends GetxController {
     FilterCardModel(title: "Resolved", value: "Resolved"),
     FilterCardModel(title: "Pending", value: "Pending"),
     FilterCardModel(
-        title: "Transffered Grievances", value: "Transffered Grievances"),
-    FilterCardModel(title: "Immediate Action", value: "Immediate Action"),
-    FilterCardModel(title: "Medium Term", value: "Medium Term"),
-    FilterCardModel(title: "Long Term", value: "Long Term")
+        title: "Transffered_Grievances", value: "Transffered Grievances"),
+    FilterCardModel(title: "Immediate_Action", value: "Immediate Action"),
+    FilterCardModel(title: "Medium_Term", value: "Medium Term"),
+    FilterCardModel(title: "Long_Term", value: "Long Term")
   ];
 
   List<DropDownDataModel> dropdownData = [

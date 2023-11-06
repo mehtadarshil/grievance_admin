@@ -330,6 +330,7 @@ class ActionDialogWidget extends StatelessWidget {
                                 });
                               },
                             ),
+
                             // if (permissions.contains("ViewStatusHistory"))
                             ActionCard(
                               cardColor: AppColors.fifthActionColor,
@@ -366,9 +367,13 @@ class ActionDialogWidget extends StatelessWidget {
                               text: "View".tr,
                               onTap: () {
                                 Get.toNamed(RouteList.grievanceDetails,
-                                    arguments: grievanceModel);
+                                        arguments: grievanceModel)!
+                                    .then((value) {
+                                  Get.back();
+                                });
                               },
                             ),
+
                             // if (permissions.contains("Delete"))
                             ActionCard(
                               cardColor: AppColors.eighthActionColor,

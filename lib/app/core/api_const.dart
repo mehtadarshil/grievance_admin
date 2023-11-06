@@ -31,6 +31,8 @@ class ApiConst {
       "reports/getgrievancestatuswisegraph";
   static const wsGetGrievanceDepartmentWiseGraph =
       "reports/getgrievancedepartmentwisegraph";
+  static const wsAssignGrievanceToDepartment =
+      "request/assigngrievancetodepartment";
 
   //const tags
   static const authorization = "Authorization";
@@ -62,9 +64,11 @@ class ApiConst {
   static const dateTo = "date_to";
   static const grievanceDetails = "grievance_details";
   static const departmentIds = "department_ids";
+  static const departmentId = "department_id";
   static const grievanceImage = "grievance_image";
   static const imageId = "image_id";
   static const imageName = "image_name";
   static const noOfRequestsPerPage = "no_of_requests_per_page";
   static const pageNo = "page_no";
+  static const grievanceCurrentStatus = "grievance_current_status";
 }

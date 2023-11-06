@@ -48,12 +48,14 @@ class DepartmentModel {
 class Datum {
   final String? idDepartment;
   final String? departmentName;
+  final String? departmentNameOdia;
   final String? isDefault;
   final DateTime? createdOn;
 
   Datum({
     this.idDepartment,
     this.departmentName,
+    this.departmentNameOdia,
     this.isDefault,
     this.createdOn,
   });
@@ -61,6 +63,7 @@ class Datum {
   factory Datum.fromJson(Map<String, dynamic> json) => Datum(
         idDepartment: json["id_department"],
         departmentName: json["department_name"],
+        departmentNameOdia: json["department_name_odia"],
         isDefault: json["is_default"],
         createdOn: json["created_on"] == null
             ? null
@@ -70,6 +73,7 @@ class Datum {
   Map<String, dynamic> toJson() => {
         "id_department": idDepartment,
         "department_name": departmentName,
+        "department_name_odia": departmentNameOdia,
         "is_default": isDefault,
         "created_on": createdOn?.toIso8601String(),
       };

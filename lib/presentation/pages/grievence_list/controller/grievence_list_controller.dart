@@ -4,6 +4,7 @@ import 'package:get/get.dart' hide FormData;
 import 'package:get_storage/get_storage.dart';
 import 'package:grievance_admin/app/core/api_client.dart';
 import 'package:grievance_admin/app/core/api_const.dart';
+import 'package:grievance_admin/app/di/app_base_component.dart';
 import 'package:grievance_admin/app/models/all_grievance_tab_count_model.dart';
 import 'package:grievance_admin/app/models/department_model.dart';
 import 'package:grievance_admin/app/models/dropdown_data_model.dart';
@@ -20,6 +21,7 @@ class GrievenceListController extends GetxController {
   final TextEditingController customerController = TextEditingController();
   final TextEditingController loactionController = TextEditingController();
   final TextEditingController departmentController = TextEditingController();
+  final ScrollController scrollController = ScrollController();
 
   RxList<GDatum> grievanceDetails = <GDatum>[].obs;
   final ApiClient _apiClient = Get.find();
@@ -69,6 +71,29 @@ class GrievenceListController extends GetxController {
         title: "Unassigned Grievances", value: "unassignedgrievance"),
     FilterCardModel(title: "Resoved/Closed", value: "closedresolved")
   ];
+
+  @override
+  void onInit() {
+    scrollController.addListener(() {
+      if (scrollController.position.atEdge) {
+        if (scrollController.position.pixels == 0) {
+        } else {
+          if (!AppComponentBase.instance.loading) {
+            pageNo = (pageNo + 1);
+            getGrievanceList();
+            loadCount();
+          }
+        }
+      }
+    });
+    super.onInit();
+  }
+
+  @override
+  void dispose() {
+    scrollController.dispose();
+    super.dispose();
+  }
 
   @override
   void onReady() {

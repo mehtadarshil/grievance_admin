@@ -86,6 +86,7 @@ class Strings {
       "NOTIFICATION": "NOTIFICATION: ",
       "REMARKS": "REMARKS: ",
       "Edit_Grievance": "Edit Grievance",
+      "Assign_Department": "Assign Department",
       "Name": "Name",
       "Resolution_Date": "Resolution Date",
       "Resolution_Time": "Resolution Time",
